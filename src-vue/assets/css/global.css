@@ -1,0 +1,177 @@
+* {
+    margin:  0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.example-showcase .el-dropdown-link {
+    cursor: pointer;
+    color: var(--el-color-primary);
+    display: flex;
+    align-items: center; /* 确保下拉菜单文字和图标垂直居中 */
+}
+
+.login-container {
+    display: flex; /* 使用 Flexbox 布局 */
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 水平居中 */
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./高山.jpg'); /* 替换为你的图片路径 */
+    background-size:  100vw 100vh; /* 宽度占满，高度自适应 */
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.welcome-title {
+    font-size: 2rem; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    color: #333; /* 字体颜色 */
+    margin-top: 170px; /* 这里调整距离顶部的距离 */
+    text-align: center;
+    margin-bottom: 20px;
+}
+.login-form {
+    width: auto; /* 控制表单的宽度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.register-form {
+    width: auto; /* 控制表单的宽度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -90px ;
+}
+
+.card-container {
+    position: relative; /* 设为相对定位，使 info-label 定位有效 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: flex-start; /* 垂直上对齐 */
+    height:100vh; /* 高度占满整个视口 */
+    flex-direction: column; /* 垂直布局 */
+    margin: 0 auto; /* 确保在页面中央 */
+    width: 45%; /* 设置宽度 */
+    margin-top: -60px; /* 调整整体向上移动 */
+}
+
+.el-card {
+    min-height: 500px; /* 设置卡片的最小高度 */
+    padding: 10px; /* 增加内边距 */
+}
+.card-header {
+    display: flex;
+    justify-content: flex-start; /* 左对齐 */
+    width: 100%; /* 占满卡片宽度 */
+}
+.info-label {
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #333;
+    font-size: 25px;
+    margin-bottom: 10px; /* 与卡片的距离 */
+}
+
+.unpublished {
+    color: red;
+    font-weight: bold;
+}
+.published {
+    color: rgba(0, 128, 2, 0.67);
+    font-weight: bold;
+}
+.inline-form {
+    display: flex;
+    align-items: center;
+}
+
+.inline-form .el-input {
+    margin-right: 10px; /* 调整输入框和按钮之间的间距 */
+    flex: 1; /* 根据需要调整输入框的宽度 */
+}
+
+.announcement-page {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.input-title, .input-date {
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.input-button{
+    margin-top: 20px;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+.announcement-details {
+    padding: 20px;
+    border: 1px solid #ebeef5;
+    background-color: #f9f9f9;
+    overflow-y: auto; /* 使公告详情区域可滚动 */
+    max-height: 500px; /* 限制最大高度 */
+}
+.no-selection {
+    color: #999;
+}
+.announcement-details p {
+    white-space: pre-wrap; /* 保留换行符和空格 */
+}
+
+.el-table-column {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.demand-container {
+    height: calc(100vh - 50px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.demand-list {
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+}
+
+.demand-card {
+    margin: 5px 0;
+    padding: 0; /* 取消 el-card 的默认 padding */
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
+}
+
+.card-content {
+    height: 100%; /* 固定内容容器高度，留出 footer 的空间 */
+    width: calc(100vw - 250px);
+    padding: 5px;
+    overflow: hidden; /* 隐藏超出内容 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平居中 */
+    text-align: center; /* 文字居中 */
+    position: relative; /* 使内容容器为定位上下文 */
+}
+
+.demand-footer {
+    position: absolute; /* 绝对定位 */
+    bottom: 10px; /* 距离底部 10 像素 */
+    right: 10px; /* 距离右侧 10 像素 */
+    color: gray;
+}
+
