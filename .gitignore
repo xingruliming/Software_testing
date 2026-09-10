@@ -1,0 +1,29 @@
+# Codex/IDE local state
+.codex_tmp/
+**/.idea/
+.workbuddy/
+**/.gradio/*.pem
+
+# Python/test caches
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local environments
+.venv/
+venv/
+
+# Runtime outputs (keep documentation and placeholders)
+vggt-main/input_images_*/
+vggt_output/**
+!vggt_output/README.md
+!vggt_output/.gitkeep
+!vggt_output/gradio/
+vggt_output/gradio/**
+!vggt_output/gradio/.gitkeep
+
+test_results/module1/**
+!test_results/module1/README.md
+
