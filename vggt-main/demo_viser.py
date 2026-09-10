@@ -345,9 +345,7 @@ def main():
     # model = VGGT.from_pretrained("facebook/VGGT-1B")
 
     model = VGGT()
-    _URL = "https://huggingface.co/facebook/VGGT-1B/resolve/main/model.pt"
-    model.load_state_dict(torch.hub.load_state_dict_from_url(_URL))
-
+    model.load_state_dict(torch.load(r"E:\0_work\vggt\model.pt", map_location=device))
     model.eval()
     model = model.to(device)
 
@@ -363,7 +361,7 @@ def main():
     dtype = torch.bfloat16 if torch.cuda.get_device_capability()[0] >= 8 else torch.float16
 
     with torch.no_grad():
-        with torch.cuda.amp.autocast(dtype=dtype):
+        with torch.amp.autocast("cuda", dtype=dtype):
             predictions = model(images)
 
     print("Converting pose encoding to extrinsic and intrinsic matrices...")

@@ -30,10 +30,7 @@ print("Initializing and loading VGGT model...")
 # model = VGGT.from_pretrained("facebook/VGGT-1B")  # another way to load the model
 
 model = VGGT()
-_URL = "https://huggingface.co/facebook/VGGT-1B/resolve/main/model.pt"
-model.load_state_dict(torch.hub.load_state_dict_from_url(_URL))
-
-
+model.load_state_dict(torch.load(r"E:\0_work\suanfa\vggt\vggt-main\model.pt", map_location=device))
 model.eval()
 model = model.to(device)
 
@@ -71,7 +68,7 @@ def run_model(target_dir, model) -> dict:
     dtype = torch.bfloat16 if torch.cuda.get_device_capability()[0] >= 8 else torch.float16
 
     with torch.no_grad():
-        with torch.cuda.amp.autocast(dtype=dtype):
+        with torch.amp.autocast("cuda",dtype=dtype):
             predictions = model(images)
 
     # Convert pose encoding to extrinsic and intrinsic matrices
@@ -177,7 +174,7 @@ def update_gallery_on_upload(input_video, input_images):
     if not input_video and not input_images:
         return None, None, None, None
     target_dir, image_paths = handle_uploads(input_video, input_images)
-    return None, target_dir, image_paths, "Upload complete. Click 'Reconstruct' to begin 3D processing."
+    return None, target_dir, image_paths, "上传完成. 点击'Reconstruct'开始3D重建."
 
 
 # -------------------------------------------------------------------------
@@ -396,37 +393,37 @@ with gr.Blocks(
 
     gr.HTML(
         """
-    <h1>🏛️ VGGT: Visual Geometry Grounded Transformer</h1>
+    <h1>🏛️ VGGT: 视觉几何定位 Transformer</h1>
     <p>
-    <a href="https://github.com/facebookresearch/vggt">🐙 GitHub Repository</a> |
-    <a href="#">Project Page</a>
+    <a href="https://github.com/facebookresearch/vggt">🐙 GitHub 仓库</a> |
+    <a href="#">项目页面</a>
     </p>
 
     <div style="font-size: 16px; line-height: 1.5;">
-    <p>Upload a video or a set of images to create a 3D reconstruction of a scene or object. VGGT takes these images and generates a 3D point cloud, along with estimated camera poses.</p>
+    <p>上传视频或一组图片来创建场景或物体的 3D 重建。VGGT 将处理这些图片并生成 3D 点云以及估计的相机位姿。</p>
 
-    <h3>Getting Started:</h3>
+    <h3>使用步骤：</h3>
     <ol>
-        <li><strong>Upload Your Data:</strong> Use the "Upload Video" or "Upload Images" buttons on the left to provide your input. Videos will be automatically split into individual frames (one frame per second).</li>
-        <li><strong>Preview:</strong> Your uploaded images will appear in the gallery on the left.</li>
-        <li><strong>Reconstruct:</strong> Click the "Reconstruct" button to start the 3D reconstruction process.</li>
-        <li><strong>Visualize:</strong> The 3D reconstruction will appear in the viewer on the right. You can rotate, pan, and zoom to explore the model, and download the GLB file. Note the visualization of 3D points may be slow for a large number of input images.</li>
+        <li><strong>上传数据：</strong> 使用左侧的"上传视频"或"上传图片"按钮来提供输入。视频将被自动拆分为单帧（每秒一帧）。</li>
+        <li><strong>预览：</strong> 已上传的图片将显示在左侧的图库中。</li>
+        <li><strong>重建：</strong> 点击"Reconstruct"按钮开始 3D 重建过程。</li>
+        <li><strong>可视化：</strong> 3D 重建结果将显示在右侧的查看器中。您可以旋转、平移和缩放来探索模型，并可下载 GLB 文件。注意：当输入图片数量较多时，3D 点的可视化可能会较慢。</li>
         <li>
-        <strong>Adjust Visualization (Optional):</strong>
-        After reconstruction, you can fine-tune the visualization using the options below
+        <strong>调整可视化（可选）：</strong>
+        重建完成后，您可以使用以下选项微调可视化效果
         <details style="display:inline;">
-            <summary style="display:inline;">(<strong>click to expand</strong>):</summary>
+            <summary style="display:inline;">（<strong>点击展开</strong>）：</summary>
             <ul>
-            <li><em>Confidence Threshold:</em> Adjust the filtering of points based on confidence.</li>
-            <li><em>Show Points from Frame:</em> Select specific frames to display in the point cloud.</li>
-            <li><em>Show Camera:</em> Toggle the display of estimated camera positions.</li>
-            <li><em>Filter Sky / Filter Black Background:</em> Remove sky or black-background points.</li>
-            <li><em>Select a Prediction Mode:</em> Choose between "Depthmap and Camera Branch" or "Pointmap Branch."</li>
+            <li><em>置信度阈值：</em> 根据置信度过滤点的显示。</li>
+            <li><em>显示指定帧的点：</em> 选择特定帧在点云中显示。</li>
+            <li><em>显示相机：</em> 切换是否显示估计的相机位置。</li>
+            <li><em>过滤天空 / 过滤黑色背景：</em> 移除天空或黑色背景的点。</li>
+            <li><em>选择预测模式：</em> 在"深度图与相机分支"或"点图分支"之间选择。</li>
             </ul>
         </details>
         </li>
     </ol>
-    <p><strong style="color: #0ea5e9;">Please note:</strong> <span style="color: #0ea5e9; font-weight: bold;">VGGT typically reconstructs a scene in less than 1 second. However, visualizing 3D points may take tens of seconds due to third-party rendering, which are independent of VGGT's processing time. </span></p>
+    <p><strong style="color: #0ea5e9;">请注意：</strong> <span style="color: #0ea5e9; font-weight: bold;">VGGT 通常在不到 1 秒内完成场景重建。然而，3D 点的可视化可能需要数十秒，这是由于第三方渲染所致，与 VGGT 的处理时间无关。</span></p>
     </div>
     """
     )
@@ -449,9 +446,9 @@ with gr.Blocks(
 
         with gr.Column(scale=4):
             with gr.Column():
-                gr.Markdown("**3D Reconstruction (Point Cloud and Camera Poses)**")
+                gr.Markdown("**3D 重建 (点云和相机位姿)**")
                 log_output = gr.Markdown(
-                    "Please upload a video or images, then click Reconstruct.", elem_classes=["custom-log"]
+                    "请上传视频或图片, 然后点击'Reconstruct'开始3D重建.", elem_classes=["custom-log"]
                 )
                 reconstruction_output = gr.Model3D(height=520, zoom_speed=0.5, pan_speed=0.5)
 
@@ -464,21 +461,21 @@ with gr.Blocks(
 
             with gr.Row():
                 prediction_mode = gr.Radio(
-                    ["Depthmap and Camera Branch", "Pointmap Branch"],
-                    label="Select a Prediction Mode",
-                    value="Depthmap and Camera Branch",
+                    ["深度图与相机分支", "点云图分支"],
+                    label="选择预测模式",
+                    value="深度图与相机分支",
                     scale=1,
                     elem_id="my_radio",
                 )
 
             with gr.Row():
-                conf_thres = gr.Slider(minimum=0, maximum=100, value=50, step=0.1, label="Confidence Threshold (%)")
-                frame_filter = gr.Dropdown(choices=["All"], value="All", label="Show Points from Frame")
+                conf_thres = gr.Slider(minimum=0, maximum=100, value=50, step=0.1, label="置信度阈值 (%)")
+                frame_filter = gr.Dropdown(choices=["All"], value="All", label="显示指定帧的点")
                 with gr.Column():
-                    show_cam = gr.Checkbox(label="Show Camera", value=True)
-                    mask_sky = gr.Checkbox(label="Filter Sky", value=False)
-                    mask_black_bg = gr.Checkbox(label="Filter Black Background", value=False)
-                    mask_white_bg = gr.Checkbox(label="Filter White Background", value=False)
+                    show_cam = gr.Checkbox(label="显示相机", value=True)
+                    mask_sky = gr.Checkbox(label="过滤天空", value=False)
+                    mask_black_bg = gr.Checkbox(label="过滤黑色背景", value=False)
+                    mask_white_bg = gr.Checkbox(label="过滤白色背景", value=False)
 
     # ---------------------- Examples section ----------------------
     examples = [
