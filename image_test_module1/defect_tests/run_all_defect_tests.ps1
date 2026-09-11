@@ -40,12 +40,12 @@ try {
         "执行时间：$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz')"
         "缺陷编号：DEF-IMG-001、DEF-IMG-002、DEF-IMG-003"
         "检查数量：9（3 条对照检查，6 条缺陷期望行为检查）"
-        "说明：修复前出现 6 个失败/错误表示 3 个缺陷均被复现。"
+        "说明：DEF-IMG-001 已修复；DEF-IMG-002、DEF-IMG-003 保持修复前基线。"
         ""
         $testOutput
         ""
         "退出码：$testExitCode"
-        "判定：3 条对照检查通过，且每个缺陷的 2 条期望行为检查失败时，3 个独立缺陷均已稳定复现。"
+        "判定：当前预期为 DEF-IMG-001 的 3 条检查通过，DEF-IMG-002 与 DEF-IMG-003 各 1 条对照通过、2 条缺陷检查失败；合计 5 条通过、4 条失败。"
     ) | Set-Content -LiteralPath $resultFile -Encoding UTF8
 
     $testOutput | ForEach-Object { Write-Host $_ }

@@ -4,7 +4,7 @@
 
 当前已确认 3 个有效缺陷：
 
-- `load_and_preprocess_images_extreme_ratio/`：复现 `load_and_preprocess_images()` 处理极端宽高比图片时把缩放高度计算为 0 的问题。
+- `load_and_preprocess_images_extreme_ratio/`：`DEF-IMG-001` 已修复并完成复测，极端宽高比图片不再产生零尺寸。
 - `exif_orientation_not_applied/`：复现两个图像预处理函数未应用 JPEG EXIF 方向，导致图像方向、输出形状及原图坐标错误的问题。
 - `palette_transparency_not_composited/`：复现两个函数未把带透明索引的调色板 PNG 合成到白色背景，透明区域被错误保留为调色板颜色的问题。
 
@@ -18,4 +18,4 @@
 .\tests\defect_tests\run_all_defect_tests.ps1
 ```
 
-脚本会依次运行 3 个缺陷目录中的 9 条检查，并把汇总证据写入 `results/all_defects_reproduction.txt`。修复前预期为 3 条对照检查通过、6 条期望行为检查失败。
+脚本会依次运行 3 个缺陷目录中的 9 条检查，并把汇总证据写入 `results/all_defects_reproduction.txt`。当前状态下预期 `DEF-IMG-001` 的 3 条检查全部通过，`DEF-IMG-002` 和 `DEF-IMG-003` 各有 1 条对照检查通过、2 条缺陷检查失败，即合计 5 条通过、4 条失败。
