@@ -1,0 +1,81 @@
+VGGT 模块二缺陷复现记录
+========================
+
+缺陷编号：DEF-M2-001
+关联用例：M2-AI-015
+严重程度：中    优先级：中
+测试对象：run_vggt_inference.py 推理入口 / vggt-main/vggt/utils/load_fn.py:140
+测试时间：2026-09-11
+Git 提交：2e73631（模块二测试用例）
+
+一、测试环境
+------------
+操作系统：Windows 11 家庭中文版（10.0.26100）
+处理器：12th Gen Intel(R) Core(TM) i7-12700H
+内存：31.8 GB
+显卡：NVIDIA GeForce RTX 3070 Laptop GPU
+显卡驱动：32.0.16.1047
+Conda 环境：Pytorch_Vggt
+Python：3.10.20
+PyTorch：2.8.0+cu128
+CUDA：12.8
+模型权重：E:\0_work\1shijian\model.pt（约 5.02 GB）
+
+二、测试需求
+------------
+当输入目录中存在无法解码的图像文件时，程序应给出明确的中文错误提示，
+以非零退出码结束，且不残留半成品输出产物。
+
+三、复现步骤与结果
+------------------
+1. 新建目录 vggt_output/exp/_abnormal/corrupt/，放入内容为 "not an image"、
+   扩展名为 broken.jpg 的文件（另放入 note.txt 以确认非图像扩展名会被忽略）。
+2. 执行：
+   D:\anaconda3\envs\Pytorch_Vggt\python.exe run_vggt_inference.py \
+       --input-dir  vggt_output/exp/_abnormal/corrupt \
+       --output-dir vggt_output/exp/_abnormal/out_corrupt
+3. 实际结果：模型权重正常加载后，在加载图像阶段抛出未捕获异常，堆栈如下（节选）：
+
+   File "run_vggt_inference.py", line 123, in run_model
+     images = load_and_preprocess_images(image_names).to(device)
+   File "vggt-main\vggt\utils\load_fn.py", line 140, in load_and_preprocess_images
+     img = Image.open(image_path)
+   File "...\PIL\Image.py", line 3580, in open
+     raise UnidentifiedImageError(msg)
+   PIL.UnidentifiedImageError: cannot identify image file
+   '...\vggt_output\exp\_abnormal\out_corrupt\images\broken.jpg'
+
+4. 进程退出码：1
+5. 残留产物：输出目录下 images/ 已写入 broken.jpg，无 predictions.npz 等后续产物。
+
+四、对照用例（同族异常路径，表现不一致）
+----------------------------------------
+场景 A：空目录（0 张图像）
+  输出：[错误] 输入目录中没有图像: <路径>；退出码 1；未创建输出目录。 —— 友好提示，符合预期
+场景 B：输入目录不存在
+  输出：[错误] 输入目录不存在: <路径>；退出码 1；未创建输出目录。 —— 友好提示，符合预期
+场景 C：损坏图像文件（本缺陷）
+  输出：未捕获的 PIL.UnidentifiedImageError 原始堆栈；退出码 1；残留半成品输出目录。 —— 不符合预期
+
+五、定位结论
+------------
+vggt-main/vggt/utils/load_fn.py 第 140 行的 Image.open(image_path) 未做异常处理，
+异常直接穿透到调用方脚本顶层。该函数把每个图像路径依次打开、转换为 RGB 并缩放，
+其中任何一张图无法解码都会让整批输入加载失败，且失败前已经写入了部分输出目录内容。
+
+六、预期结果
+------------
+加载阶段应捕获解码异常，提示「第 N 张图像无法解码：<路径>」后以非零退出码统一退出；
+并在失败时清理或明确标注半成品输出目录。
+
+七、修复建议（非处理结果）
+--------------------------
+1. 在 load_fn.py 的图像加载循环内包一层 try/except，捕获 PIL.UnidentifiedImageError
+   与 OSError，抛出带「文件名 + 序号」的中文异常；
+2. 建议在 run_vggt_inference.py 的顶层统一捕获并打印友好提示，保留非零退出码；
+3. 失败路径上清理本次新建的输出目录，或在目录中写入 FAILED 标记文件。
+
+八、变更说明
+------------
+本次仅执行复现与证据记录，没有修改 vggt-main 中任何源文件。
+失败现场与运行日志保存在 vggt_output/exp/_abnormal/out_corrupt/。
