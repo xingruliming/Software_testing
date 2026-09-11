@@ -27,6 +27,8 @@
 Software_testing/
 ├── README.md
 ├── run_vggt_demo.ps1          # 从正确工作目录启动现有可视化程序
+├── run_vggt_inference.py      # 无界面推理：输入图像目录 -> 深度图 + GLB
+├── cv2_unicode.py             # OpenCV 中文路径兼容层（cv2.imread / cv2.imwrite）
 ├── tests/                     # 小组成员人工编写的模块一测试工程
 ├── test_results/module1/      # 人工执行后保存日志、JUnit XML、截图等
 ├── deliverables/module1/      # 附录模板副本、操作手册和检查清单
@@ -70,6 +72,55 @@ Set-Location "E:\办公\研一\1软件实践\Software_testing\vggt-main"
 ```
 
 启动后按终端输出访问本地 Gradio 地址。结束服务时在启动终端按 `Ctrl+C`。
+
+## 无界面批量推理（深度图 + GLB）
+
+`run_vggt_inference.py` 复制了 `demo_gradio_cn.py` 的推理与产物逻辑，但完全不启动 Gradio，适合批量跑用例和自动化归档。
+
+```powershell
+& "D:\anaconda3\envs\Pytorch_Vggt\python.exe" .\run_vggt_inference.py `
+    --input-dir  "vggt_input/001_watercup" `
+    --output-dir "vggt_output/001_watercup"
+```
+
+产物（默认 `vggt_output/<输入目录名>/`）：
+
+| 路径 | 内容 |
+|---|---|
+| `images/` | 输入图像副本 |
+| `depth/000000.png ...` | 逐帧伪彩色深度图（INFERNO，2%~98% 分位数归一化） |
+| `predictions.npz` | 完整预测（`depth`、`depth_conf`、`world_points`、`extrinsic`、`intrinsic`、`world_points_from_depth` …） |
+| `glbscene_*.glb` | 3D 场景（点云 + 相机），每个预测分支一个 |
+| `run_info.json` | `inference` 块记录帧数、耗时、峰值显存；`this_run` 记录本轮的运行模式与耗时 |
+
+常用参数：
+
+- `--prediction-modes "深度图与相机分支,点云图分支"`：要导出 GLB 的分支，逗号分隔；留空则只出深度图和 npz。
+- `--conf-thres 50.0`：GLB 点云置信度过滤百分比，与界面默认值一致。
+- `--from-npz`：复用输出目录里已有的 `predictions.npz`，跳过推理，只重出深度图 / GLB（调参时用，秒级完成）。此时 `run_info.json` 的 `inference` 块会继承首轮的真实统计，不会被清零。
+- `--mask-sky` / `--mask-white-bg` / `--mask-black-bg` / `--no-show-cam`：同界面上的可视化选项。
+
+### 中文路径兼容层 `cv2_unicode.py`
+
+> ⚠️ **已知缺陷：`cv2.imwrite` / `cv2.imread` 在含中文的路径下静默失败。**
+> Windows 上 OpenCV 按 ANSI 码页处理路径：`imwrite` 返回 `False` 且不抛异常、`imread` 返回 `None` 只打一条 WARN。
+> 本机仓库路径 `E:\办公\研一\1软件实践\...` 必然触发，调用方若不检查返回值就会「日志说成功、磁盘上没文件」。
+
+`cv2_unicode.py` 用 `np.fromfile` + `cv2.imdecode` 读、`cv2.imencode` + 文件对象写来绕开该问题：
+
+```python
+import cv2_unicode
+cv2_unicode.patch()          # 全局替换，原代码里的 cv2.imread / cv2.imwrite 自动生效
+cv2_unicode.unpatch()        # 还原原生实现，用于复现缺陷
+```
+
+`run_vggt_inference.py` 已接入该兼容层，深度图写盘不再静默失败。
+
+**待办（本轮未处理）**：被测程序 `vggt-main/` 基线内部的调用点仍存在同一问题 ——
+`demo_gradio_cn.py` 的 `save_depth_images()`、上传视频抽帧的 `cv2.imwrite()`，
+以及 `visual_util.segment_sky()` 的 `cv2.imread()` / `cv2.imwrite()`。
+它们只影响可视化界面（深度图画廊为空、天空过滤失效），不影响深度图与 GLB 结果本身。
+按「基线默认不修改」的约定，这些位置留作缺陷记录，后续可用兼容层统一处理。
 
 ## 模块一测试接入
 
