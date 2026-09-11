@@ -1,0 +1,36 @@
+DEF-IMG-003 调色板 PNG 透明区域未合成到白色背景
+执行时间：2026-09-11 09:44:32 +08:00
+被测函数：load_and_preprocess_images；load_and_preprocess_images_square
+输入：全透明 P 模式 PNG；全透明 RGBA PNG 对照
+
+test_rgba_transparency_control_is_composited_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_rgba_transparency_control_is_composited_on_white) ... ok
+test_square_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_square_loader_should_composite_palette_transparency_on_white) ... FAIL
+test_standard_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_standard_loader_should_composite_palette_transparency_on_white) ... FAIL
+
+======================================================================
+FAIL: test_square_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_square_loader_should_composite_palette_transparency_on_white)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 31, in test_square_loader_should_composite_palette_transparency_on_white
+    self.assert_white(result)
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 16, in assert_white
+    self.assertTrue(torch.allclose(tensor, torch.ones_like(tensor), atol=1e-6))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_standard_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_standard_loader_should_composite_palette_transparency_on_white)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 26, in test_standard_loader_should_composite_palette_transparency_on_white
+    self.assert_white(result)
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 16, in assert_white
+    self.assertTrue(torch.allclose(tensor, torch.ones_like(tensor), atol=1e-6))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.032s
+
+FAILED (failures=2)
+
+退出码：1
+判定：RGBA 对照通过，而两个 P 模式透明度检查失败时，缺陷已复现。

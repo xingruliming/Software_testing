@@ -1,0 +1,43 @@
+DEF-IMG-002 JPEG EXIF 方向未应用
+执行时间：2026-09-11 09:44:32 +08:00
+被测函数：load_and_preprocess_images；load_and_preprocess_images_square
+输入：存储尺寸 40×20、EXIF Orientation=6 的 JPEG；无 EXIF 对照 JPEG
+
+test_control_without_orientation_keeps_landscape_shape (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_control_without_orientation_keeps_landscape_shape) ... ok
+test_square_loader_should_report_displayed_orientation_coordinates (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_square_loader_should_report_displayed_orientation_coordinates) ... FAIL
+test_standard_loader_should_apply_orientation_before_resize (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_standard_loader_should_apply_orientation_before_resize) ... FAIL
+
+======================================================================
+FAIL: test_square_loader_should_report_displayed_orientation_coordinates (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_square_loader_should_report_displayed_orientation_coordinates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\exif_orientation_not_applied\expected_behavior_checks.py", line 29, in test_square_loader_should_report_displayed_orientation_coordinates
+    self.assertTrue(torch.equal(coords, expected), f"actual coords={coords.tolist()}")
+AssertionError: False is not true : actual coords=[[0.0, 35.0, 140.0, 105.0, 40.0, 20.0]]
+
+======================================================================
+FAIL: test_standard_loader_should_apply_orientation_before_resize (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_standard_loader_should_apply_orientation_before_resize)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\exif_orientation_not_applied\expected_behavior_checks.py", line 23, in test_standard_loader_should_apply_orientation_before_resize
+    self.assertEqual(tuple(result.shape), (1, 3, 518, 518))
+AssertionError: Tuples differ: (1, 3, 252, 518) != (1, 3, 518, 518)
+
+First differing element 2:
+252
+518
+
+- (1, 3, 252, 518)
+?        - ^
+
++ (1, 3, 518, 518)
+?         ^^
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.020s
+
+FAILED (failures=2)
+
+退出码：1
+判定：无 EXIF 对照通过，而两个方向期望检查失败时，缺陷已复现。

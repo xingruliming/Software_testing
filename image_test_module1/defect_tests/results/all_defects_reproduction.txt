@@ -1,0 +1,105 @@
+VGGT 图像预处理模块 3 个有效缺陷汇总复现
+执行时间：2026-09-11 09:44:19 +08:00
+缺陷编号：DEF-IMG-001、DEF-IMG-002、DEF-IMG-003
+检查数量：9（3 条对照检查，6 条缺陷期望行为检查）
+说明：修复前出现 6 个失败/错误表示 3 个缺陷均被复现。
+
+test_control_crop_height_fourteen_succeeds (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_control_crop_height_fourteen_succeeds)
+The existing minimum patch-aligned boundary remains valid. ... ok
+test_crop_height_one_should_not_produce_zero_dimension (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_crop_height_one_should_not_produce_zero_dimension)
+A readable image should not crash during resize. ... ERROR
+test_pad_height_one_should_return_square_tensor (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_pad_height_one_should_return_square_tensor)
+Pad mode should preserve the image and return a 518 square. ... ERROR
+test_control_without_orientation_keeps_landscape_shape (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_control_without_orientation_keeps_landscape_shape) ... ok
+test_square_loader_should_report_displayed_orientation_coordinates (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_square_loader_should_report_displayed_orientation_coordinates) ... FAIL
+test_standard_loader_should_apply_orientation_before_resize (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_standard_loader_should_apply_orientation_before_resize) ... FAIL
+test_rgba_transparency_control_is_composited_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_rgba_transparency_control_is_composited_on_white) ... ok
+test_square_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_square_loader_should_composite_palette_transparency_on_white) ... FAIL
+test_standard_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_standard_loader_should_composite_palette_transparency_on_white) ... FAIL
+
+======================================================================
+ERROR: test_crop_height_one_should_not_produce_zero_dimension (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_crop_height_one_should_not_produce_zero_dimension)
+A readable image should not crash during resize.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\load_and_preprocess_images_extreme_ratio\expected_behavior_checks.py", line 30, in test_crop_height_one_should_not_produce_zero_dimension
+    result = load_and_preprocess_images([str(image_path)], mode="crop")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\codex\vggt\vggt-main\vggt\utils\load_fn.py", line 169, in load_and_preprocess_images
+    img = img.resize((new_width, new_height), Image.Resampling.BICUBIC)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\codex\vggt\vggt-main\.venv\Lib\site-packages\PIL\Image.py", line 2321, in resize
+    return self._new(self.im.resize(size, resample, box))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: height and width must be > 0
+
+======================================================================
+ERROR: test_pad_height_one_should_return_square_tensor (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_pad_height_one_should_return_square_tensor)
+Pad mode should preserve the image and return a 518 square.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\load_and_preprocess_images_extreme_ratio\expected_behavior_checks.py", line 41, in test_pad_height_one_should_return_square_tensor
+    result = load_and_preprocess_images([str(image_path)], mode="pad")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\codex\vggt\vggt-main\vggt\utils\load_fn.py", line 169, in load_and_preprocess_images
+    img = img.resize((new_width, new_height), Image.Resampling.BICUBIC)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\codex\vggt\vggt-main\.venv\Lib\site-packages\PIL\Image.py", line 2321, in resize
+    return self._new(self.im.resize(size, resample, box))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: height and width must be > 0
+
+======================================================================
+FAIL: test_square_loader_should_report_displayed_orientation_coordinates (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_square_loader_should_report_displayed_orientation_coordinates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\exif_orientation_not_applied\expected_behavior_checks.py", line 29, in test_square_loader_should_report_displayed_orientation_coordinates
+    self.assertTrue(torch.equal(coords, expected), f"actual coords={coords.tolist()}")
+AssertionError: False is not true : actual coords=[[0.0, 35.0, 140.0, 105.0, 40.0, 20.0]]
+
+======================================================================
+FAIL: test_standard_loader_should_apply_orientation_before_resize (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_standard_loader_should_apply_orientation_before_resize)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\exif_orientation_not_applied\expected_behavior_checks.py", line 23, in test_standard_loader_should_apply_orientation_before_resize
+    self.assertEqual(tuple(result.shape), (1, 3, 518, 518))
+AssertionError: Tuples differ: (1, 3, 252, 518) != (1, 3, 518, 518)
+
+First differing element 2:
+252
+518
+
+- (1, 3, 252, 518)
+?        - ^
+
++ (1, 3, 518, 518)
+?         ^^
+
+
+======================================================================
+FAIL: test_square_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_square_loader_should_composite_palette_transparency_on_white)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 31, in test_square_loader_should_composite_palette_transparency_on_white
+    self.assert_white(result)
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 16, in assert_white
+    self.assertTrue(torch.allclose(tensor, torch.ones_like(tensor), atol=1e-6))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_standard_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_standard_loader_should_composite_palette_transparency_on_white)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 26, in test_standard_loader_should_composite_palette_transparency_on_white
+    self.assert_white(result)
+  File "D:\codex\vggt\vggt-main\tests\defect_tests\palette_transparency_not_composited\expected_behavior_checks.py", line 16, in assert_white
+    self.assertTrue(torch.allclose(tensor, torch.ones_like(tensor), atol=1e-6))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.040s
+
+FAILED (failures=4, errors=2)
+
+退出码：1
+判定：3 条对照检查通过，且每个缺陷的 2 条期望行为检查失败时，3 个独立缺陷均已稳定复现。
