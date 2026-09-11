@@ -1,16 +1,16 @@
-# VGGT 缺陷复现测试
+# VGGT 缺陷修复验证测试
 
-本目录保存已经确认的软件缺陷及其独立复现工程。缺陷测试与 `tests` 下原有的 15 条常规自动化用例分开，避免一键执行正常回归测试时被“预期失败”的缺陷用例干扰。
+本目录保存 3 个已确认软件缺陷的复现证据、修复代码验证和独立自动化检查。专项检查与 `tests` 下原有的 15 条常规自动化用例分开，便于分别保留修复前、修复后的执行证据。
 
 当前已确认 3 个有效缺陷：
 
 - `load_and_preprocess_images_extreme_ratio/`：`DEF-IMG-001` 已修复并完成复测，极端宽高比图片不再产生零尺寸。
-- `exif_orientation_not_applied/`：复现两个图像预处理函数未应用 JPEG EXIF 方向，导致图像方向、输出形状及原图坐标错误的问题。
-- `palette_transparency_not_composited/`：复现两个函数未把带透明索引的调色板 PNG 合成到白色背景，透明区域被错误保留为调色板颜色的问题。
+- `exif_orientation_not_applied/`：`DEF-IMG-002` 已修复并完成复测，两个图像预处理函数会在尺寸计算前应用 JPEG EXIF 方向。
+- `palette_transparency_not_composited/`：`DEF-IMG-003` 已修复并完成复测，带透明索引的调色板 PNG 会合成到白色背景。
 
 每个缺陷目录包含输入数据、复现代码、一键运行脚本、执行结果和中文说明。
 
-## 一键复现全部缺陷
+## 一键验证全部缺陷修复
 
 在项目根目录运行：
 
@@ -18,4 +18,4 @@
 .\tests\defect_tests\run_all_defect_tests.ps1
 ```
 
-脚本会依次运行 3 个缺陷目录中的 9 条检查，并把汇总证据写入 `results/all_defects_reproduction.txt`。当前状态下预期 `DEF-IMG-001` 的 3 条检查全部通过，`DEF-IMG-002` 和 `DEF-IMG-003` 各有 1 条对照检查通过、2 条缺陷检查失败，即合计 5 条通过、4 条失败。
+脚本会依次运行 3 个缺陷目录中的 9 条检查，并把修复后汇总证据写入 `results/all_defects_fix_verification.txt`。当前预期为 9 条检查全部通过；修复前的 `results/all_defects_reproduction.txt` 保留作为历史证据。随后还应运行 `tests/run_tests.ps1`，确认原有 15 条常规回归测试全部通过。

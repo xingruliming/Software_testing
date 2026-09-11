@@ -30,9 +30,14 @@ tests/
 ├── load_and_preprocess_images/
 │   ├── test_equivalence.py
 │   └── test_boundary.py
-└── load_and_preprocess_images_square/
-    ├── test_equivalence.py
-    └── test_boundary.py
+├── load_and_preprocess_images_square/
+│   ├── test_equivalence.py
+│   └── test_boundary.py
+└── defect_tests/
+    ├── load_and_preprocess_images_extreme_ratio/
+    ├── exif_orientation_not_applied/
+    ├── palette_transparency_not_composited/
+    └── run_all_defect_tests.ps1
 ```
 
 其中：
@@ -42,6 +47,7 @@ tests/
 - `test_equivalence.py`：存放等价类划分测试；
 - `test_boundary.py`：存放边界值测试；
 - `run_tests.ps1`：一键运行全部测试用例。
+- `defect_tests/`：保存 DEF-IMG-001～003 的修复前证据、修复后验证脚本、结果与说明。
 
 ## 四、运行环境
 
@@ -87,3 +93,13 @@ OK
 ```
 
 其含义为：共执行 15 条测试用例，所有用例均通过。
+
+## 七、三个缺陷的修复验证
+
+在项目根目录执行：
+
+```powershell
+.\tests\defect_tests\run_all_defect_tests.ps1
+```
+
+该脚本共执行 9 条专项检查。当前 DEF-IMG-001、DEF-IMG-002、DEF-IMG-003 均为 3/3 通过，汇总结果为 9/9 通过；原有 15 条常规回归测试仍为 15/15 通过。修复前与修复后的证据分别保留在各缺陷目录的 `results/` 中。

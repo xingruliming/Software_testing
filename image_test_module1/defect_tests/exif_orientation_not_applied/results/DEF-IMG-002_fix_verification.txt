@@ -1,0 +1,16 @@
+DEF-IMG-002 JPEG EXIF 方向修复验证
+执行时间：2026-09-11 14:57:07 +08:00
+被测函数：load_and_preprocess_images；load_and_preprocess_images_square
+输入：存储尺寸 40×20、EXIF Orientation=6 的 JPEG；无 EXIF 对照 JPEG
+
+test_control_without_orientation_keeps_landscape_shape (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_control_without_orientation_keeps_landscape_shape) ... ok
+test_square_loader_should_report_displayed_orientation_coordinates (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_square_loader_should_report_displayed_orientation_coordinates) ... ok
+test_standard_loader_should_apply_orientation_before_resize (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_standard_loader_should_apply_orientation_before_resize) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.066s
+
+OK
+
+退出码：0
+判定：退出码为 0 且 3 条检查全部通过时，DEF-IMG-002 修复验证通过。

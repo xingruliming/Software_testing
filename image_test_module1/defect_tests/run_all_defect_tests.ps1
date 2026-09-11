@@ -4,7 +4,7 @@ $defectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $projectRoot = Resolve-Path (Join-Path $defectRoot "..\..")
 $python = Join-Path $projectRoot ".venv\Scripts\python.exe"
 $resultDirectory = Join-Path $defectRoot "results"
-$resultFile = Join-Path $resultDirectory "all_defects_reproduction.txt"
+$resultFile = Join-Path $resultDirectory "all_defects_fix_verification.txt"
 
 if (-not (Test-Path -LiteralPath $python)) {
     throw "未找到项目 Python 环境：$python"
@@ -36,20 +36,20 @@ try {
     $testExitCode = $LASTEXITCODE
 
     @(
-        "VGGT 图像预处理模块 3 个有效缺陷汇总复现"
+        "VGGT 图像预处理模块 3 个有效缺陷修复验证汇总"
         "执行时间：$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz')"
         "缺陷编号：DEF-IMG-001、DEF-IMG-002、DEF-IMG-003"
         "检查数量：9（3 条对照检查，6 条缺陷期望行为检查）"
-        "说明：DEF-IMG-001 已修复；DEF-IMG-002、DEF-IMG-003 保持修复前基线。"
+        "说明：DEF-IMG-001、DEF-IMG-002、DEF-IMG-003 均已修复并进入回归验证。"
         ""
         $testOutput
         ""
         "退出码：$testExitCode"
-        "判定：当前预期为 DEF-IMG-001 的 3 条检查通过，DEF-IMG-002 与 DEF-IMG-003 各 1 条对照通过、2 条缺陷检查失败；合计 5 条通过、4 条失败。"
+        "判定：退出码为 0 且 9 条检查全部通过时，三个缺陷的修复验证通过。"
     ) | Set-Content -LiteralPath $resultFile -Encoding UTF8
 
     $testOutput | ForEach-Object { Write-Host $_ }
-    Write-Host "汇总复现记录已保存：$resultFile"
+    Write-Host "汇总修复验证记录已保存：$resultFile"
 }
 finally {
     Pop-Location

@@ -1,0 +1,26 @@
+VGGT 图像预处理模块 3 个有效缺陷修复验证汇总
+执行时间：2026-09-11 14:57:18 +08:00
+缺陷编号：DEF-IMG-001、DEF-IMG-002、DEF-IMG-003
+检查数量：9（3 条对照检查，6 条缺陷期望行为检查）
+说明：DEF-IMG-001、DEF-IMG-002、DEF-IMG-003 均已修复并进入回归验证。
+
+test_control_crop_height_fourteen_succeeds (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_control_crop_height_fourteen_succeeds)
+The existing minimum patch-aligned boundary remains valid. ... ok
+test_crop_height_one_should_not_produce_zero_dimension (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_crop_height_one_should_not_produce_zero_dimension)
+A readable image should not crash during resize. ... ok
+test_pad_height_one_should_return_square_tensor (tests.defect_tests.load_and_preprocess_images_extreme_ratio.expected_behavior_checks.TestExtremeAspectRatioExpectedBehavior.test_pad_height_one_should_return_square_tensor)
+Pad mode should preserve the image and return a 518 square. ... ok
+test_control_without_orientation_keeps_landscape_shape (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_control_without_orientation_keeps_landscape_shape) ... ok
+test_square_loader_should_report_displayed_orientation_coordinates (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_square_loader_should_report_displayed_orientation_coordinates) ... ok
+test_standard_loader_should_apply_orientation_before_resize (tests.defect_tests.exif_orientation_not_applied.expected_behavior_checks.TestExifOrientationExpectedBehavior.test_standard_loader_should_apply_orientation_before_resize) ... ok
+test_rgba_transparency_control_is_composited_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_rgba_transparency_control_is_composited_on_white) ... ok
+test_square_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_square_loader_should_composite_palette_transparency_on_white) ... ok
+test_standard_loader_should_composite_palette_transparency_on_white (tests.defect_tests.palette_transparency_not_composited.expected_behavior_checks.TestPaletteTransparencyExpectedBehavior.test_standard_loader_should_composite_palette_transparency_on_white) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.046s
+
+OK
+
+退出码：0
+判定：退出码为 0 且 9 条检查全部通过时，三个缺陷的修复验证通过。
