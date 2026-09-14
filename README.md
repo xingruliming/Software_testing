@@ -1,19 +1,22 @@
 # VGGT 软件测试与质量保证实践
 
-本仓库以 VGGT 的几何坐标转换模块为模块一被测对象，并保留 VGGT 中文可视化程序用于功能演示。教师后来已明确许可 AI 参与模块一用例设计；当前已形成 32 条测试用例，自动化测试代码、正式执行结果和缺陷结论尚未完成。
+本仓库以 VGGT 的几何坐标转换模块为模块一被测对象，并保留 VGGT 中文可视化程序用于功能演示。教师已明确许可 AI 参与模块一用例设计。
+
+**模块一坐标转换（A 线）已完成**：32 条正式用例（另含 1 条对照，共 33 条）已全部实现为 `unittest` 自动化代码，一键入口 `run_tests.ps1` / `双击运行模块一测试.bat` 可直接运行并归档结果。当前实测 **33 条中 31 条通过、2 条失败**，失败项指向已登记且尚未修复的缺陷 `DEF-M1-001`。
 
 ## 当前阶段
 
-- 当前只处理模块一的外围结构、运行保护、文档模板和坐标转换测试用例设计。
+- 模块一坐标转换（A 线）已完成用例设计、自动化实现与正式执行；缺陷记录与报告在 `deliverables/module1/`。
+- 模块一图像处理（B 线）已有 3 个完成修复验证的缺陷，产物在 `image_test_module1/`。
+- 模块二（AI 融合实践）产物在 `deliverables/module2/`。
 - `vggt-main/` 作为被测软件基线，默认不修改。
-- `VGGT测试方案.md` 偏向 AI 系统鲁棒性分析，暂作为模块二储备材料，不计入模块一用例与结果。
-- 附录1填报版已包含 32 条模块一测试用例，全部标记为可自动化；当前仍不包含 pytest 测试脚本或正式执行结果。
+- `VGGT测试方案.md` 偏向 AI 系统鲁棒性分析，作为模块二储备材料，不计入模块一用例与结果。
 
 ## 被测对象
 
-模块一建议选择 `vggt-main/vggt/utils/geometry.py`，主要包含深度图反投影、相机/世界坐标转换、SE(3) 变换求逆、三维点投影和畸变处理等确定性功能。该模块约 324 行，可以在不加载 VGGT 大模型的情况下进行单元测试。
+模块一被测对象为 `vggt-main/vggt/utils/geometry.py`，主要包含深度图反投影、相机/世界坐标转换、SE(3) 变换求逆、三维点投影和畸变处理等确定性功能。该模块约 324 行，可以在不加载 VGGT 大模型的情况下进行单元测试。
 
-模块一暂不覆盖：
+模块一不覆盖：
 
 - 模型训练流程；
 - 论文精度指标复现；
@@ -26,16 +29,22 @@
 ```text
 Software_testing/
 ├── README.md
+├── 双击运行模块一测试.bat       # 模块一（坐标转换）双击即跑的入口（调 run_tests.ps1）
 ├── run_tests.ps1              # 模块一（坐标转换）一键测试入口
 ├── run_vggt_demo.ps1          # 从正确工作目录启动现有可视化程序
 ├── run_vggt_inference.py      # 无界面推理：输入图像目录 -> 深度图 + GLB
+├── metrics.py                 # 无真值自洽性指标工具（G1–G4）
 ├── cv2_unicode.py             # OpenCV 中文路径兼容层（cv2.imread / cv2.imwrite）
-├── tests/                     # 小组成员人工编写的模块一测试工程
-├── test_results/module1/      # 人工执行后保存日志、JUnit XML、截图等
-├── deliverables/module1/      # 附录模板副本、操作手册和检查清单
+├── tests/                     # 模块一坐标转换测试工程（8 文件 / 33 条用例）
+├── test_results/
+│   ├── module1/               # 模块一执行日志、JUnit XML、DEF-M1-001 复现记录
+│   └── module2/               # 模块二缺陷复现记录
+├── deliverables/
+│   ├── module1/               # 附录1 用例清单、附录2 缺陷报告、操作手册、检查清单
+│   └── module2/               # 模块二报告、用例清单、缺陷报告
+├── image_test_module1/        # 模块一图像处理（B 线）用例、缺陷测试与报告
 ├── vggt_input/                # 演示输入素材
 ├── vggt_output/               # 可再生的运行产物
-├── metrics.py                 # 模块二可继续使用的无真值指标工具
 └── vggt-main/                 # 被测软件与中文可视化程序
 ```
 
@@ -44,12 +53,13 @@ Software_testing/
 当前已知环境：
 
 - Windows；
-- Conda 环境：`Pytorch_Vggt`；
-- Python：3.10；
-- CUDA 版 PyTorch；
-- 模型权重：`E:\办公\研一\1软件实践\model.pt`。
+- Conda 环境：`Pytorch_Vggt`（`D:\anaconda3\envs\Pytorch_Vggt\python.exe`）；
+- Python：3.10.20；
+- CUDA 版 PyTorch：2.8.0+cu128；
+- GPU：NVIDIA GeForce RTX 3070 Laptop（8 GB）；
+- 模型权重：`E:\0_work\1shijian\model.pt`（约 5.0 GB，位于本工程**上一级**）。
 
-请勿将 `model.pt`、运行产生的点云/GLB、缓存或本地证书提交到 Git。若权重位置改变，当前 `demo_gradio_cn.py` 中的既有权重路径也需要同步处理；模块一默认不修改该脚本。
+请勿将 `model.pt`、运行产生的点云/GLB、缓存或本地证书提交到 Git。若权重位置改变，`run_vggt_demo.ps1` / `run_vggt_inference.py` 的 `--model` 默认值及 `demo_gradio_cn.py` 中的既有权重路径需同步处理；模块一默认不修改该脚本。
 
 ## 启动 VGGT 可视化
 
@@ -68,7 +78,7 @@ powershell -ExecutionPolicy Bypass -File .\run_vggt_demo.ps1
 也可以直接运行原程序，但必须先进入它所在的目录，以保证相对路径有效：
 
 ```powershell
-Set-Location "E:\办公\研一\1软件实践\Software_testing\vggt-main"
+Set-Location "E:\0_work\1shijian\Software_testing\vggt-main"
 & "D:\anaconda3\envs\Pytorch_Vggt\python.exe" ".\demo_gradio_cn.py"
 ```
 
@@ -105,7 +115,7 @@ Set-Location "E:\办公\研一\1软件实践\Software_testing\vggt-main"
 
 > ⚠️ **已知缺陷：`cv2.imwrite` / `cv2.imread` 在含中文的路径下静默失败。**
 > Windows 上 OpenCV 按 ANSI 码页处理路径：`imwrite` 返回 `False` 且不抛异常、`imread` 返回 `None` 只打一条 WARN。
-> 本机仓库路径 `E:\办公\研一\1软件实践\...` 必然触发，调用方若不检查返回值就会「日志说成功、磁盘上没文件」。
+> 只要路径含非 ASCII 字符（如中文目录名或中文文件名）即会触发，调用方若不检查返回值就会「日志说成功、磁盘上没文件」。
 
 `cv2_unicode.py` 用 `np.fromfile` + `cv2.imdecode` 读、`cv2.imencode` + 文件对象写来绕开该问题：
 
@@ -133,7 +143,7 @@ cv2_unicode.unpatch()        # 还原原生实现，用于复现缺陷
    —— 已完成，标注写入各用例 docstring。
 4. ~~创建根目录 `run_tests.ps1`~~ —— 已创建，见下方「模块一一键测试入口」。
 5. 只记录经过真实复现的有效缺陷；模块一缺陷报告至少需要 3 个有效缺陷及修复验证记录。
-   —— 进行中：坐标转换线现有 `DEF-M1-001`（见下）；图像处理线已有 3 个已完成修复验证的缺陷。
+   —— 进行中：坐标转换线（A 线）现有 `DEF-M1-001`（见下）；图像处理线（B 线）已有 3 个已完成修复验证的缺陷。
 
 ### 当前执行结果（2026-09-14）
 
@@ -148,9 +158,22 @@ cv2_unicode.unpatch()        # 还原原生实现，用于复现缺陷
 证据：`test_results/module1/DEF-M1-001_reproduction.txt`（复现记录）、
 `test_results/module1/run_<时间戳>.log`（本次执行日志）。
 
-具体操作顺序和填报要求见 `deliverables/module1/测试操作手册.md`。
+具体操作顺序和填报要求见 `deliverables/module1/测试操作手册.docx`。
 
 ## 模块一一键测试入口
+
+### 方式一：双击运行（推荐给现场演示）
+
+直接双击仓库根目录的 **`双击运行模块一测试.bat`** 即可。它会自动切换码页与工作目录、
+定位 PowerShell、调用 `run_tests.ps1`，跑完暂停窗口以便查看结果，并按退出码给出结论。
+
+> 该 `.bat` 本体为 **纯 ASCII + UTF-8 无 BOM + CRLF**。这是刻意的：`cmd.exe` 按 DBCS 字节
+> 偏移解析批处理，`chcp 65001` 中途改码页会让紧随其后的多字节字符被拆到读缓冲两端、
+> 行尾泄漏成命令（实测 611 B 小文件报错、6.7 KB 同内容文件干净，属字节对齐而非体积问题）。
+> 因此中文界面全部由 `run_tests.ps1` 与 Python 输出，`.bat` 只保留 ASCII 骨架。
+> **请勿用编辑器把它另存为「带 BOM」或「LF 行尾」，否则报错会复发。**
+
+### 方式二：命令行运行
 
 `run_tests.ps1` 只负责模块一坐标转换系统（被测对象 `vggt-main/vggt/utils/geometry.py`，
 用例 `M1-GEO-001 ~ M1-GEO-032`），不涉及模块二与 `image_test_module1/`。
@@ -178,8 +201,9 @@ powershell -ExecutionPolicy Bypass -File .\run_tests.ps1
    `vggt-main` 导入路径，**不修改被测源码**。
 4. **归档结果**：控制台日志写入 `test_results\module1\run_<时间戳>.log`；
    若 `tests\junit_report.py` 存在则同时生成 `run_<时间戳>.xml`（JUnit XML）。
+   **日志由 Python 以 UTF-8 直接落盘**，不经 PowerShell 文本捕获，避免中文双重编码。
 5. **退出码**：`0` = 全部通过；`1` = 有失败/错误；`2` = 未找到测试工程；
-   `3` = 无法导入被测模块。
+   `3` = 无法导入被测模块。（`双击运行模块一测试.bat` 另用 `9` 表示前置条件不满足。）
 
 参数：`-PythonExecutable <路径>`、`-TestPattern <glob>`（默认 `test_m1_geo*.py`）、
 `-NoLog`（只打印不归档）。

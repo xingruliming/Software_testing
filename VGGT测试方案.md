@@ -139,7 +139,7 @@
 |---|---|
 | Python | 3.10.20（Anaconda 环境 `Pytorch_Vggt`） |
 | 关键依赖 | torch（CUDA）、opencv-python 4.13.0、numpy 2.2.6、gradio |
-| 模型权重 | `E:\办公\研一\1软件实践\model.pt`（约 5.02 GB） |
+| 模型权重 | `E:\0_work\1shijian\model.pt（位于本工程上一级）`（约 5.02 GB） |
 | 输入数据 | `vggt_input/`（6 个场景 + 8 段视频） |
 | 结果归档 | `vggt_output/`（demo 会自动备份产物到 `vggt_output/gradio/<时间戳>/`） |
 

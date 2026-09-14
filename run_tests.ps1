@@ -236,6 +236,13 @@ $testExitCode = 0
 $testOutput   = @()
 $xmlWritten   = $false
 
+# 让子进程 Python 以 UTF-8 读写标准流。
+# unittest 把用例 docstring（含中文用例名）写到 stderr；若子进程按系统默认的 GBK
+# 输出，控制台就会显示成乱码（如「涓ゅ抚」）。PYTHONIOENCODING 强制 UTF-8 后，
+# 只要控制台也处于 UTF-8 码页（双击入口已 chcp 65001），回显即正常。
+$savedPythonIoEncoding = $env:PYTHONIOENCODING
+$env:PYTHONIOENCODING = "utf-8"
+
 Push-Location $projectRoot
 try {
     # 先收集输出再统一打印：避免 Tee-Object + Write-Host 管线在 5.1 下丢输出。
@@ -274,6 +281,7 @@ try {
 }
 finally {
     Pop-Location
+    $env:PYTHONIOENCODING = $savedPythonIoEncoding
 }
 
 # ---------------------------------------------------------------------------
