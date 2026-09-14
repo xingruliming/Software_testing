@@ -1,0 +1,6 @@
+﻿python 3.10.20
+torch 2.8.0+cu128
+cuda True
+gpu NVIDIA GeForce RTX 3070 Laptop GPU
+cap (8, 6)
+mem_GB 8.0

@@ -1,0 +1,50 @@
+{
+  "source_root": "E:/0_work/suanfa/vggt/download/extracted",
+  "dest": "E:/0_work/1shijian/Software_testing/vggt_input/008_airport",
+  "total_images": 1372,
+  "naming": "<dataset>_frame_00000.png ... <dataset>_frame_00195.png",
+  "datasets": [
+    {
+      "dataset": "airbus",
+      "count": 196,
+      "prefix": "airbus_frame_",
+      "src": "E:/0_work/suanfa/vggt/download/extracted\\airbus_multiview\\images"
+    },
+    {
+      "dataset": "f51d_mustang_6_25",
+      "count": 196,
+      "prefix": "f51d_mustang_6_25_frame_",
+      "src": "E:/0_work/suanfa/vggt/download/extracted\\f51d_mustang_6_25_multiview\\images"
+    },
+    {
+      "dataset": "il86",
+      "count": 196,
+      "prefix": "il86_frame_",
+      "src": "E:/0_work/suanfa/vggt/download/extracted\\il86_multiview\\images"
+    },
+    {
+      "dataset": "littlebird",
+      "count": 196,
+      "prefix": "littlebird_frame_",
+      "src": "E:/0_work/suanfa/vggt/download/extracted\\littlebird_multiview\\images"
+    },
+    {
+      "dataset": "s39",
+      "count": 196,
+      "prefix": "s39_frame_",
+      "src": "E:/0_work/suanfa/vggt/download/extracted\\s39_multiview\\images"
+    },
+    {
+      "dataset": "se210",
+      "count": 196,
+      "prefix": "se210_frame_",
+      "src": "E:/0_work/suanfa/vggt/download/extracted\\se210_multiview\\images"
+    },
+    {
+      "dataset": "wessex",
+      "count": 196,
+      "prefix": "wessex_frame_",
+      "src": "E:/0_work/suanfa/vggt/download/extracted\\wessex_multiview\\images"
+    }
+  ]
+}
