@@ -26,6 +26,7 @@
 ```text
 Software_testing/
 ├── README.md
+├── run_tests.ps1              # 模块一（坐标转换）一键测试入口
 ├── run_vggt_demo.ps1          # 从正确工作目录启动现有可视化程序
 ├── run_vggt_inference.py      # 无界面推理：输入图像目录 -> 深度图 + GLB
 ├── cv2_unicode.py             # OpenCV 中文路径兼容层（cv2.imread / cv2.imwrite）
@@ -124,15 +125,67 @@ cv2_unicode.unpatch()        # 还原原生实现，用于复现缺陷
 
 ## 模块一测试接入
 
-后续仍需完成以下内容：
-
-1. 评审附录1中现有的 32 条用例，并建立测试编号与 pytest 函数的对应关系。
-2. 至少实现 24 条自动化，建议将当前 32 条可自动化用例全部实现。
-3. 保留 Excel 中已经标注的等价类、边界值、错误推测、判定表和组合覆盖方法。
-4. 创建根目录 `run_tests.ps1`，使其能一次运行全部自动化用例，并把 JUnit XML 和日志保存到 `test_results/module1/`。
+1. ~~评审附录1中现有的 32 条用例，并建立测试编号与 pytest 函数的对应关系。~~
+   —— 已完成：`tests/module1_coordinate/` 按 `M1-GEO-001 ~ 032` 编号实现。
+2. ~~至少实现 24 条自动化，建议将当前 32 条可自动化用例全部实现。~~
+   —— 已完成：33 条（32 条正式用例 + `M1-GEO-019` 的 1 条对照）。
+3. ~~保留 Excel 中已经标注的等价类、边界值、错误推测、判定表和组合覆盖方法。~~
+   —— 已完成，标注写入各用例 docstring。
+4. ~~创建根目录 `run_tests.ps1`~~ —— 已创建，见下方「模块一一键测试入口」。
 5. 只记录经过真实复现的有效缺陷；模块一缺陷报告至少需要 3 个有效缺陷及修复验证记录。
+   —— 进行中：坐标转换线现有 `DEF-M1-001`（见下）；图像处理线已有 3 个已完成修复验证的缺陷。
+
+### 当前执行结果（2026-09-14）
+
+在仓库根目录执行 `run_tests.ps1` 的结果：**33 条中 31 条通过、2 条失败**。
+
+失败的两条是 `M1-GEO-016`、`M1-GEO-018`，二者指向同一个**已登记且尚未修复**的缺陷
+**`DEF-M1-001`**：`unproject_depth_map_to_point_map` 的文档声明支持 `(S,H,W)` 三维
+深度图，但实现里 `depth_map[frame_idx].squeeze(-1)` 在 `W == 1` 时会删掉宽度维，
+导致 `H, W = depth_map.shape` 解包失败。两条用例按文档承诺的**预期结果**断言，
+因此缺陷修复前必然失败——这正是要暴露的问题；修复后应自动转为通过。
+
+证据：`test_results/module1/DEF-M1-001_reproduction.txt`（复现记录）、
+`test_results/module1/run_<时间戳>.log`（本次执行日志）。
 
 具体操作顺序和填报要求见 `deliverables/module1/测试操作手册.md`。
+
+## 模块一一键测试入口
+
+`run_tests.ps1` 只负责模块一坐标转换系统（被测对象 `vggt-main/vggt/utils/geometry.py`，
+用例 `M1-GEO-001 ~ M1-GEO-032`），不涉及模块二与 `image_test_module1/`。
+
+在仓库根目录执行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\run_tests.ps1
+```
+
+也可显式指定解释器：
+
+```powershell
+.\run_tests.ps1 -PythonExecutable "D:\anaconda3\envs\Pytorch_Vggt\python.exe"
+```
+
+脚本行为：
+
+1. **自动探测解释器**：依次尝试 `vggt-main\.venv`、仓库根 `.venv`、conda 环境
+   `Pytorch_Vggt`，最后回退到 PATH 上的 `python`；也可用 `-PythonExecutable` 指定。
+2. **前置检查**：确认基线目录、`geometry.py`、`tests\` 测试工程存在，并从外层验证
+   能 import 被测模块（不导入 `demo_gradio_cn.py`，避免触发模型加载）。
+3. **执行用例**：以 `tests\module1_coordinate\`（若不存在则退回 `tests\`）为发现起点，
+   用 `unittest discover -p test_m1_geo*.py` 运行；从外层通过 `PYTHONPATH` 注入
+   `vggt-main` 导入路径，**不修改被测源码**。
+4. **归档结果**：控制台日志写入 `test_results\module1\run_<时间戳>.log`；
+   若 `tests\junit_report.py` 存在则同时生成 `run_<时间戳>.xml`（JUnit XML）。
+5. **退出码**：`0` = 全部通过；`1` = 有失败/错误；`2` = 未找到测试工程；
+   `3` = 无法导入被测模块。
+
+参数：`-PythonExecutable <路径>`、`-TestPattern <glob>`（默认 `test_m1_geo*.py`）、
+`-NoLog`（只打印不归档）。
+
+> 注意：`.gitignore` 默认忽略 `test_results/module1/` 下的运行产物（仅跟踪 `README.md`），
+> 需要提交测试证据时请显式 `git add -f` 或在 `module1/README.md` 中登记。
 
 ## Git 提交要求
 
