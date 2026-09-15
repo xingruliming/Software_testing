@@ -1,0 +1,33 @@
+{
+ "items": {
+  "properties": {
+   "dimension_type": {
+    "description": "row | col",
+    "type": "string"
+   },
+   "end_index": {
+    "description": "结束索引（0-based，闭区间，含该行/列）。必须 >= start_index",
+    "type": "integer"
+   },
+   "is_clear": {
+    "description": "是否恢复默认值",
+    "type": "boolean"
+   },
+   "size": {
+    "description": "行高或列宽（像素）",
+    "type": "number"
+   },
+   "start_index": {
+    "description": "起始索引（0-based，闭区间）",
+    "type": "integer"
+   }
+  },
+  "required": [
+   "dimension_type",
+   "start_index",
+   "end_index"
+  ],
+  "type": "object"
+ },
+ "type": "array"
+}

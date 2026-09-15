@@ -1,0 +1,42 @@
+{
+ "description": "单元格值列表",
+ "items": {
+  "properties": {
+   "bool_value": {
+    "description": "布尔值 (value_type=BOOL)",
+    "type": "boolean"
+   },
+   "col": {
+    "description": "列索引（0-based）",
+    "type": "integer"
+   },
+   "formula": {
+    "description": "公式 (value_type=FORMULA), 如 =SUM(A1:A10)",
+    "type": "string"
+   },
+   "number_value": {
+    "description": "数值 (value_type=NUMBER)",
+    "type": "number"
+   },
+   "row": {
+    "description": "行索引（0-based）",
+    "type": "integer"
+   },
+   "string_value": {
+    "description": "字符串值 (value_type=STRING)",
+    "type": "string"
+   },
+   "value_type": {
+    "description": "值类型: NUMBER, STRING, BOOL, FORMULA",
+    "type": "string"
+   }
+  },
+  "required": [
+   "row",
+   "col",
+   "value_type"
+  ],
+  "type": "object"
+ },
+ "type": "array"
+}

@@ -1,0 +1,7 @@
+SHEET: 软件需求清单 dims=A1:D1
+  [('A1', '功能模块名'), ('B1', '子模块名'), ('C1', '功能描述'), ('D1', '备注')]
+  merged: []
+SHEET: Sheet2 dims=A1:A1
+  merged: []
+SHEET: Sheet3 dims=A1:A1
+  merged: []

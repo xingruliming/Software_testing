@@ -1,0 +1,55 @@
+﻿
+VGGT 模块一：算法坐标转换系统 · 一键测试
+被测对象：vggt-main/vggt/utils/geometry.py
+用例范围：M1-GEO-001 ~ M1-GEO-032
+执行时间：2026-09-15 19:42:40 +08:00
+    Python 解释器：D:\anaconda3\envs\Pytorch_Vggt\python.exe
+    被测模块导入检查通过：vggt-main/vggt/utils/geometry.py
+
+==> 发现并执行用例
+    发现起点：E:\0_work\1shijian\Software_testing\tests\module1_coordinate
+    匹配模式：test_m1_geo*.py
+...............E.E...............
+======================================================================
+ERROR: test_m1_geo_016_two_frame_batch (tests.module1_coordinate.test_m1_geo_016_019_unproject.TestUnprojectDepthMapToPointMap)
+M1-GEO-016: 涓ゅ抚 (S,H,W) 娣卞害鍥炬壒閲忓弽鎶曞奖 鈥斺€?鏆撮湶 DEF-M1-001銆?
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\0_work\1shijian\Software_testing\tests\module1_coordinate\test_m1_geo_016_019_unproject.py", line 43, in test_m1_geo_016_two_frame_batch
+    result = unproject_depth_map_to_point_map(depth_map, extrinsics, intrinsics)
+  File "E:\0_work\1shijian\Software_testing\vggt-main\vggt\utils\geometry.py", line 38, in unproject_depth_map_to_point_map
+    cur_world_points, _, _ = depth_to_world_coords_points(
+  File "E:\0_work\1shijian\Software_testing\vggt-main\vggt\utils\geometry.py", line 71, in depth_to_world_coords_points
+    cam_coords_points = depth_to_cam_coords_points(depth_map, intrinsic)
+  File "E:\0_work\1shijian\Software_testing\vggt-main\vggt\utils\geometry.py", line 98, in depth_to_cam_coords_points
+    H, W = depth_map.shape
+ValueError: not enough values to unpack (expected 2, got 1)
+
+======================================================================
+ERROR: test_m1_geo_018_torch_input_converted_to_numpy (tests.module1_coordinate.test_m1_geo_016_019_unproject.TestUnprojectDepthMapToPointMap)
+M1-GEO-018: Torch 杈撳叆搴旇嚜鍔ㄨ浆 NumPy 骞惰繑鍥?np.ndarray 鈥斺€?鏆撮湶 DEF-M1-001銆?
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\0_work\1shijian\Software_testing\tests\module1_coordinate\test_m1_geo_016_019_unproject.py", line 71, in test_m1_geo_018_torch_input_converted_to_numpy
+    result = unproject_depth_map_to_point_map(depth, extrinsic, intrinsic)
+  File "E:\0_work\1shijian\Software_testing\vggt-main\vggt\utils\geometry.py", line 38, in unproject_depth_map_to_point_map
+    cur_world_points, _, _ = depth_to_world_coords_points(
+  File "E:\0_work\1shijian\Software_testing\vggt-main\vggt\utils\geometry.py", line 71, in depth_to_world_coords_points
+    cam_coords_points = depth_to_cam_coords_points(depth_map, intrinsic)
+  File "E:\0_work\1shijian\Software_testing\vggt-main\vggt\utils\geometry.py", line 98, in depth_to_cam_coords_points
+    H, W = depth_map.shape
+ValueError: not enough values to unpack (expected 2, got 1)
+
+----------------------------------------------------------------------
+Ran 33 tests in 0.101s
+
+FAILED (errors=2)
+JUnit XML written: E:\0_work\1shijian\Software_testing\test_results\module1\run_20260915_194243.xml
+
+==> 执行结果
+    退出码：1
+    控制台日志：E:\0_work\1shijian\Software_testing\test_results\module1\run_20260915_194243.log
+    JUnit XML ：E:\0_work\1shijian\Software_testing\test_results\module1\run_20260915_194243.xml
+
+存在未通过用例，请查看上方 FAIL/ERROR 明细与归档日志。
+注意：测试未通过不等于有效缺陷；有效缺陷需经复现、分析、处理与复测，并保留证据。

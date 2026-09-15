@@ -1,0 +1,22 @@
+  P01 <- tpl1  :: VGGT | 模块一 | 测试汇报 | 汇报人丨黄国宸 曹钧杰 | 时间丨 | 2026 | . | 9 | 32 条用例 · 2 种方法 |  |  | 0 权重 0 GPU |  |  
+  目录条目 -> [(35, '被测对象'), (40, '测试策略'), (44, '自动化实施'), (48, '结果与结论')]
+  P02 <- tpl2  :: 目录 | CONTENTS | 1 | 被测对象 | 2 | 测试策略 | 3 | 自动化实施 | 4 | 结果与结论
+  P03 <- tpl3  :: P | 01 | 被测对象核心功能 | TEST OBJECT &amp; CORE FUNCTIONS
+  P04 <- tpl4  :: P | 被测对象：VGGT 的几何计算层 | TEST OBJECT &amp; CORE FUNCTIONS | 被测 | 对象 | 1 | 前馈式三维大模型 | FEED-FORWARD
+  P05 <- tpl7  :: P | 文档承诺与实现不一致，是最值得测的位置 | DOC CONTRACT VS IMPLEMENTATION | 函数契约（第 22 行） | docstring 明文声明：depth_
+  P06 <- tpl6  :: P | 02 | 主要测试策略 | MAIN TEST STRATEGY
+  P07 <- tpl5  :: P | 等价类 + 边界值：两种经典方法打底 | TWO CORE METHODS | 等价类划分 | 例 001：单像素深度反投影，应精确回到原像素；例 004：内参尺寸非法应抛错。合法/
+  P08 <- tpl4  (复制) :: P | 每条用例都标了方法，可以逐条对账 | CASE TO METHOD MAPPING | 测试 | 方法 | 1 | 等价类划分 | EQUIVALENCE · 19 CASES | 
+  P09 <- tpl8  :: P | 用最小输入逼出两类失败 | SHAPE MATRIX OF TEST SAMPLES | 失败②：W &gt; 1 时对非单位轴 squeeze，直接抛错。 | 通过：正常返回 (2
+  P10 <- tpl4  (复制) :: P | 一条命令跑完的自动化测试工程 | TEST AUTOMATION | 自动 | 化 | 1 | 一键运行的测试工程 | 8 FILES |  |  | 33 EXECUTIONS |
+  P11 <- tpl5  (复制) :: P | 一次真实执行：33 条执行，31 通过 | ONE REAL RUN · 93.9% PASS | 33 | 条自动化用例执行，覆盖全部 8 个函数。 | 31 | 条通过，含 1 
+  P12 <- tpl7  (复制) :: P | DEF-M1-001：一根被删掉的宽度维 | DEFECT LOCATION | 现象与影响 | 输入 (2, 1, 1) 三维深度图即抛 ValueError；docstring 
+  P13 <- tpl4  (复制) :: P | 修复建议：文档与实现必须有一个让步 | FIX SUGGESTION &amp; REGRESSION | 修复 | 方案 | 1 | 条件式 squeeze | NDIM-AWAR
+  P14 <- tpl5  (复制) :: P | 四条结论，每条都有数据支撑 | CONCLUSIONS | 质量结论 | 31/33 通过，唯一失败同源于一个缺陷；被测模块质量整体可信。 | 缺陷处置 | DEF-M1-001 已
+  P15 <- tpl15 :: 谢谢观看 | 汇报人丨黄国宸 曹钧杰 | 时间丨 | 2026 | . | 9 | 脱离权重单测 |  |  | 用例自动转绿 |  |  | 一条命令复现
+  剔除旧 slide 关系 15 条，保留其他 6 条
+  Content_Types: 声明 15 页 + 86 个 tag
+
+已写出临时包: C:\Users\LENOVO\AppData\Local\Temp\ppt_work\build2\out.pptx
+页数: 15  大小: 1349.8 KB
+目标: E:\0_work\1shijian\Software_testing\deliverables\模块一测试工作汇报\模块一测试工作汇报.pptx

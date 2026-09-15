@@ -1,0 +1,19 @@
+id=42 in tpl xml: True
+set 11  before=True OK
+set 29  before=True OK
+set 3   before=True OK
+set 17  before=True OK
+set 20  before=True OK
+set 42  before=True OK
+set 22  before=True OK
+set 48  before=True OK
+set 52  before=True OK
+set 53  before=True OK
+after: id=17 exists: True
+after: sp_block(17): found
+after: id=42 exists: True
+after: sp_block(42): found
+after: id=48 exists: True
+after: sp_block(48): found
+after: id=53 exists: True
+after: sp_block(53): found

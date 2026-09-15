@@ -1,0 +1,86 @@
+﻿python.exe : EEEE
+所在位置 行:445 字符: 152
++ ... t_module1"; & "D:\anaconda3\envs\Pytorch_Vggt\python.exe" -m unittest ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (EEEE:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+======================================================================
+ERROR: load_and_preprocess_images.test_boundary (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: load_and_preprocess_images.test_boun
+dary
+Traceback (most recent call last):
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 436, in _f
+ind_test_path
+    module = self._get_module_from_name(name)
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 377, in _g
+et_module_from_name
+    __import__(name)
+  File "E:\0_work\1shijian\Software_testing\deliverables\image_test_module1\loa
+d_and_preprocess_images\test_boundary.py", line 1, in <module>
+    from tests.common import ImageFixtureTestCase
+ModuleNotFoundError: No module named 'tests'
+
+
+======================================================================
+ERROR: load_and_preprocess_images.test_equivalence (unittest.loader._FailedTest
+)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: load_and_preprocess_images.test_equi
+valence
+Traceback (most recent call last):
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 436, in _f
+ind_test_path
+    module = self._get_module_from_name(name)
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 377, in _g
+et_module_from_name
+    __import__(name)
+  File "E:\0_work\1shijian\Software_testing\deliverables\image_test_module1\loa
+d_and_preprocess_images\test_equivalence.py", line 3, in <module>
+    from tests.common import ImageFixtureTestCase, fixed_input
+ModuleNotFoundError: No module named 'tests'
+
+
+======================================================================
+ERROR: load_and_preprocess_images_square.test_boundary (unittest.loader._Failed
+Test)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: load_and_preprocess_images_square.te
+st_boundary
+Traceback (most recent call last):
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 436, in _f
+ind_test_path
+    module = self._get_module_from_name(name)
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 377, in _g
+et_module_from_name
+    __import__(name)
+  File "E:\0_work\1shijian\Software_testing\deliverables\image_test_module1\loa
+d_and_preprocess_images_square\test_boundary.py", line 1, in <module>
+    from tests.common import ImageFixtureTestCase
+ModuleNotFoundError: No module named 'tests'
+
+
+======================================================================
+ERROR: load_and_preprocess_images_square.test_equivalence (unittest.loader._Fai
+ledTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: load_and_preprocess_images_square.te
+st_equivalence
+Traceback (most recent call last):
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 436, in _f
+ind_test_path
+    module = self._get_module_from_name(name)
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\unittest\loader.py", line 377, in _g
+et_module_from_name
+    __import__(name)
+  File "E:\0_work\1shijian\Software_testing\deliverables\image_test_module1\loa
+d_and_preprocess_images_square\test_equivalence.py", line 3, in <module>
+    from tests.common import ImageFixtureTestCase
+ModuleNotFoundError: No module named 'tests'
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+FAILED (errors=4)

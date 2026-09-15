@@ -1,0 +1,22 @@
+SHEET: Test Cases测试用例 max_row=12389
+Test Case ID 测试用例编号  | Test Item 测试项（即功能模块或函数）  | Test Case Title 测试用例标题  | Test Criticality重要级别  | 是否自动用例
+TCI-01  | load_and_preprocess_images()  | 合法 RGB PNG 图片的 crop 模式处理  | 高  | 
+TCI-02  | load_and_preprocess_images()  | 合法 RGBA 透明 PNG 图片的 pad 模式处理  | 中  | 
+TCI-03  | load_and_preprocess_images()  | 合法灰度 TIFF 图片的 crop 模式处理  | 中  | 
+TCI-04  | load_and_preprocess_images()  | 两张图片的批量预处理  | 高  | 
+TCI-05  | load_and_preprocess_images()  | 非法处理模式参数  | 高  | 
+TCI-06  | load_and_preprocess_images()  | 空图片列表输入  | 高  | 
+TCI-07  | load_and_preprocess_images()  | 1×1 最小尺寸图片处理  | 高  | 
+TCI-08  | load_and_preprocess_images()  | 高度为 14 像素的补丁对齐边界  | 高  | 
+TCI-09  | load_and_preprocess_images_s  | 横向 RGB 图片的正方形预处理  | 高  | 
+TCI-10  | load_and_preprocess_images_s  | 纵向 RGB 图片的正方形预处理  | 高  | 
+TCI-11  | load_and_preprocess_images_s  | RGBA 透明图片的正方形预处理  | 中  | 
+TCI-12  | load_and_preprocess_images_s  | 不存在的图片路径  | 高  | 
+TCI-13  | load_and_preprocess_images_s  | 正方形预处理的空图片列表输入  | 高  | 
+TCI-14  | load_and_preprocess_images_s  | target_size=1 的最小目标尺寸  | 高  | 
+TCI-15  | load_and_preprocess_images_s  | target_size=14 的补丁尺寸边界  | 高  | 
+  |   |   |   | 
+  |   |   |   | 
+  |   |   |   | 
+  |   |   |   | 
+  |   |   |   | 

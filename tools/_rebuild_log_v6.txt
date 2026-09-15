@@ -1,0 +1,16 @@
+  P01 <- tpl1  :: VGGT | 模块一 | 测试汇报 | 汇报人丨黄国宸 曹钧杰 | 时间丨 | 2026 | . | 9 | 32 条用例 · 2 种方法 |  |  | 0 权重 0 GPU |  |  
+  目录条目 -> [(35, '被测对象'), (40, '测试策略'), (44, '自动化实施'), (48, '结果与结论')]
+  P02 <- tpl2  :: 目录 | CONTENTS | 1 | 被测对象 | 2 | 测试策略 | 3 | 自动化实施 | 4 | 结果与结论
+  P03 <- tpl3  :: P | 01 | 被测对象核心功能 | TEST OBJECT &amp; CORE FUNCTIONS
+  P04 <- tpl4  :: P | 被测对象：VGGT 的几何计算层 | TEST OBJECT &amp; CORE FUNCTIONS | 被测 | 对象 | 1 | 前馈式三维大模型 | FEED-FORWARD
+  P05 <- tpl7  :: P | 文档承诺与实现不一致，是最值得测的位置 | DOC CONTRACT VS IMPLEMENTATION | 函数契约（第 22 行） | docstring 明文声明：depth_
+  P06 <- tpl6  :: P | 02 | 主要测试策略 | MAIN TEST STRATEGY
+Traceback (most recent call last):
+  File "E:\0_work\1shijian\Software_testing\tools\_rebuild_deck.py", line 475, in <module>
+    main()
+    ~~~~^^
+  File "E:\0_work\1shijian\Software_testing\tools\_rebuild_deck.py", line 327, in main
+    xml = shrink_shape_font(xml, sid, sz)
+  File "E:\0_work\1shijian\Software_testing\tools\_rebuild_deck.py", line 79, in shrink_shape_font
+    raise RuntimeError("shape id=%s not found" % shape_id)
+RuntimeError: shape id=42 not found

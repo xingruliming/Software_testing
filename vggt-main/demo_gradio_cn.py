@@ -82,7 +82,7 @@ print("Initializing and loading VGGT model...")
 # model = VGGT.from_pretrained("facebook/VGGT-1B")  # another way to load the model
 
 model = VGGT()
-model.load_state_dict(torch.load(r"E:\办公\研一\1软件实践\model.pt", map_location=device))
+model.load_state_dict(torch.load(r"E:\0_work\1shijian\model.pt", map_location=device))
 model.eval()
 model = model.to(device)
 
