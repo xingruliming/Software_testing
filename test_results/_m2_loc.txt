@@ -1,0 +1,15 @@
+﻿  389 行  run_vggt_inference.py
+  476 行  metrics.py
+  123 行  cv2_unicode.py
+  247 行  robustness_experiments.py
+   70 行  make_depth_contact_sheet.py
+  286 行  common.py
+  141 行  junit_report.py
+  135 行  test_m2_ai_001_005_frame_effect.py
+  115 行  test_m2_ai_006_009_robustness.py
+  104 行  test_m2_ai_010_012_scene_dependency.py
+  112 行  test_m2_ai_013_015_input_validation.py
+    6 行  __init__.py
+
+原工具合计: 1305 行
+含单元测试工程合计: 2204 行

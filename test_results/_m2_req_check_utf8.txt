@@ -1,0 +1,16 @@
+﻿python.exe : Traceback (most recent call last):
+所在位置 行:445 字符: 1
++ & "C:\Users\LENOVO\.workbuddy\binaries\python\envs\default\Scripts\py ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "E:\0_work\1shijian\Software_testing\tools\_m2_req_check.py", line 36, in <module>
+    "R%02d h=%-6s 需 %d 行(C) / %d 行(D) → %s | %s | %s"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    % (r, h, need_c, need_d, "OK" if fits else "偏紧",
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       str(vals[0] or "")[:22], str(vals[1] or "")[:24], (c_text or "")[:30])
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: not all arguments converted during string formatting
+

@@ -1,0 +1,13 @@
+﻿WROTE E:\0_work\1shijian\Software_testing\deliverables\module2\软件需求清单_模块二.xlsx
+需求条数: 11
+  R02  VGGT 推理输出（深度图与 npz 点云） / 深度图与逐像素置信度输出（depth / depth_con
+  R03  VGGT 推理输出（深度图与 npz 点云） / 点云双路径输出（world_points / world_p
+  R04  VGGT 推理输出（深度图与 npz 点云） / 相机内外参与参考系约定（extrinsic / intrin
+  R05  VGGT 推理输出（深度图与 npz 点云） / 输出确定性与可复现性
+  R06  VGGT 推理输出（深度图与 npz 点云） / 鲁棒性与退化可观测性
+  R07  VGGT 批量推理入口（run_vggt_inf / 输入目录校验与异常处理一致性
+  R08  VGGT 批量推理入口（run_vggt_inf / 产物归档与运行元信息记录
+  R09  VGGT 输入加载与预处理（vggt.utils / 多视图图像加载与尺寸归一化（load_and_preproc
+  R10  VGGT 点云导出与后处理（visual_uti / 置信度过滤与点云裁剪（--conf-thres）
+  R11  VGGT 点云导出与后处理（visual_uti / 背景剔除与预测分支选择
+  R12  VGGT 图像读写工具链（opencv-pyth / 中文（非 ASCII）路径下的图像读写

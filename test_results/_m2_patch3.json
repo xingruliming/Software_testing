@@ -1,0 +1,4 @@
+{
+  "old_text": "本组自建的测试工具共 1369 行（run_vggt_inference.py 411 行、metrics.py 491 行、cv2_unicode.py 134 行、tools/robustness_experiments.py 261 行、tools/make_depth_contact_sheet.py 72 行）",
+  "new_text": "本组自建的测试工具共 2204 行：批量推理与指标链路 run_vggt_inference.py 389 行、metrics.py 476 行、cv2_unicode.py 123 行、tools/robustness_experiments.py 247 行、tools/make_depth_contact_sheet.py 70 行，另有单元测试工程 deliverables/module2/m2_tests/ 共 899 行（15 条用例的自动化实现与一键运行入口）"
+}

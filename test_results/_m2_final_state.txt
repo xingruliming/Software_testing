@@ -1,0 +1,11 @@
+﻿== 残留 python 进程 ==
+(无)
+
+== GPU ==
+18 %, 735 MiB, 8192 MiB
+
+== sq4096 相关目录 ==
+exp\sq4096  文件数=8  npz=False
+exp\sq4096_stale_9frames  文件数=23  npz=True
+exp\_inputs\sq4096  文件数=8  npz=False
+exp\_inputs\sq4096_stale_9frames  文件数=9  npz=False

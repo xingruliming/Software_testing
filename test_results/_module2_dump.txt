@@ -1,0 +1,529 @@
+======================================================================
+XLSX: VGGT模块二测试用例清单.xlsx
+======================================================================
+[SHEET] Information文档信息  dims=B2:L43  max_row=43 max_col=12
+  R02 |  || Test  Case Form 测试用例表单 ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R06 |  || General Information 基本信息 ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R07 |  || Product Verion 产品版本 ||  ||  || 模块二（AI 融合实践 · 方案1 测 AI） ||  || Confidentiality level 密级 ||  ||  || 课程作业 ||  || 
+  R08 |  || Project Name 项目名称 ||  ||  || VGGT 深度图与 npz 点云输出 ||  || Project ID 项目ID ||  ||  || 【待填写：项目ID】 ||  || 
+  R09 |  || Prepared by 拟制 ||  ||  || 【待填写：拟制人】 ||  || Date 日期 ||  ||  || 【待填写：日期】 ||  || 
+  R10 |  || Reviewed by 评审人 ||  ||  || 【待填写：评审人】 ||  || Date 日期 ||  ||  || 【待填写：日期】 ||  || 
+  R11 |  || Approved by 批准 ||  ||  || 【待填写：批准人】 ||  || Date 日期 ||  ||  || 【待填写：日期】 ||  || 
+  R13 |  || Number of Test cases 测试用例数 ||  ||  || 15 ||  ||  ||  ||  ||  ||  || 
+  R15 |  || Introduction 概述 ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R16 |  || 模块二为 AI 融合实践，选定方案 1「测 AI」，被测对象为 VGGT 整个算法的输出：深度图（depth / depth_conf）与 npz 点云（world_points / world_points_from_depth）。共 15 条用例，围绕无真值几何自洽性指标 G1–G4 与鲁棒性扰动矩阵设计，覆盖帧数效应、分辨率、高斯噪声、遮挡、重复运行确定性、跨场景可用性与异常输入。实测通过 13 条、失败 2 条（M2-AI-010、M2-AI-015），对应缺陷 DEF-M2-002 与 DEF-M2-001。 ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R18 |  || Revision Record 修订记录 ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R19 |  || Date 日期 || Revision Version 修订 版本 || CR ID / Defect ID CR号 || Change Description 修改描述 ||  ||  ||  ||  ||  || Author 作者 || 
+  R20 |  || 2026.09.11 || 0.10 || N/A || 依据附录1模板建立《模块二测试用例清单》副本，清空模板示例数据 ||  ||  ||  ||  ||  || 【待填写】 || 
+  R21 |  || 2026.09.11 || 1.00 || DEF-M2-001、DEF-M2-002 || 填入 15 条 AI 输出测试用例及实测执行结果（通过 POK 13、失败 NG 2），含 G1–G4 指标与鲁棒性扰动矩阵的实测数值 ||  ||  ||  ||  ||  || 【待填写】 || 
+  R22 |  ||  ||  || xxx || revised xxx 修改XXX Xxx Xxx ... ||  ||  ||  ||  ||  || Name 作者名 || 
+  R23 |  || yyyy.mm.dd || 1.02 || xxx || revised xxx 修改XXX Xxx Xxx ... ||  ||  ||  ||  ||  || Name 作者名 || 
+  R24 |  || …… || …… || …… || …… ||  ||  ||  ||  ||  || Name 作者名 || 
+  R25 |  || yyyy.mm.dd || 2 || xxx || revised xxx 修改XXX Xxx Xxx ... ||  ||  ||  ||  ||  || …… || 
+  R27 |  || Distribution LIST 分发记录 ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R28 |  || Copy No. || Holder's Name & Role  持有者和角色 ||  ||  ||  ||  ||  ||  || Issue Date  分发日期 ||  || 
+  R29 |  || 1 || <T.M.B&C.P.M> ||  ||  ||  ||  ||  ||  || yyyy.mm.dd ||  || 
+  R30 |  || 2 || <Project Manager> ||  ||  ||  ||  ||  ||  || yyyy.mm.dd ||  || 
+  R31 |  || 3 || <Team members> ||  ||  ||  ||  ||  ||  || yyyy.mm.dd ||  || 
+  R32 |  || 4 || <Customer Representative> ||  ||  ||  ||  ||  ||  || yyyy.mm.dd ||  || 
+  R33 |  || 5 || <Others> ||  ||  ||  ||  ||  ||  || yyyy.mm.dd ||  || 
+  R37 |  || 测试结果分析 ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R38 |  || OK项 || 13 || OK率 || 0.866666666666667 ||  ||  ||  ||  ||  ||  || 
+  R39 |  || POK项 || 0 || POK率 || 0 ||  ||  ||  ||  ||  ||  || 
+  R40 |  || NG项 || 2 || NG率 || 0.133333333333333 ||  ||  ||  ||  ||  ||  || 
+  R41 |  || NT项 || 0 || NT率 || 0 ||  ||  ||  ||  ||  ||  || 
+  R43 |  || 用例总个数 || 15 ||  ||  ||  ||  ||  ||  ||  ||  || 
+[SHEET] Test Cases测试用例  dims=A1:Z200  max_row=200 max_col=26
+  R01 | Test Case ID 测试用例编号 || Test Item 测试项（即功能模块或函数） || Test Case Title 测试用例标题 || Test Criticality重要级别 || 是否自动用例 || 是否新增修改用例 || Pre-condition 预置条件 || Input 输入 || Procedure 操作步骤 || Output 预期结果 || Result / 实际结果 || Status / 是否通过 || Remark 备注（在此描述使用的测试方法） ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R02 | M2-AI-001 || VGGT 输出整体（深度图 + npz 点云） || 基准场景自洽性基线测量（9 帧） || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || input-dir=vggt_input/002_computer（9 帧横构图教室场景）；conf_thres=3.0；prediction-modes=深度图与相机分支,点云图分支 || 1. 执行 run_vggt_inference.py --input-dir vggt_input/002_computer --output-dir vggt_output/002_computer。 / 2. 执行 metrics.py vggt_output/002_computer/predictions.npz --conf-thres 3.0。 / 3. 记录 G1–G4 指标与加载/前馈耗时、峰值显存。 || 四项自洽性指标均可统计；depth/ 下生成与帧数一致的深度图；predictions.npz 可读；两个预测分支 GLB 均为合法 glTF 且可加载。 || G1 相对误差 1.585e-3；G2 平均重投影像素误差 2.171 px（<5 px 占 99.45%）；G3 深度置信均值 8.125、最大值 16.993；G4 NCC 0.8729。模型加载 10.26 s、前馈 16.62 s、端到端 40.3 s、峰值显存 8.467 GB；深度图 9/9 张。 || OK || 场景法：基准场景默认参数基线 || OK ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R03 | M2-AI-002 || VGGT 输出整体（深度图 + npz 点云） || 帧数减少至 5 帧的自洽性退化 || 中 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || input-dir=002_computer 前 5 帧子集；conf_thres=3.0 || 1. 取 002_computer 前 5 帧建立输入目录。 / 2. 执行推理与指标计算。 / 3. 与 9 帧基线对比。 || 各项指标相对基线退化，但仍可统计。 || G1 相对误差 2.093e-3；G2 2.236 px；G3 深度置信均值 6.965、低置信占比 21.64%；G4 NCC 0.9153；峰值显存 7.662 GB。 || OK || 边界值：帧数下界方向 || POK ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R04 | M2-AI-003 || VGGT 输出整体（深度图 + npz 点云） || 帧数减少至 2 帧的自洽性退化 || 中 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || input-dir=002_computer 前 2 帧子集；conf_thres=3.0 || 1. 取 002_computer 前 2 帧建立输入目录。 / 2. 执行推理与指标计算。 / 3. 与 5 帧、9 帧结果对比。 || 各项指标进一步退化。 || G1 相对误差 3.062e-3；G2 2.710 px；G3 深度置信均值 5.092、低置信占比 23.78%；G4 NCC 0.9472；峰值显存 6.997 GB。 || OK || 边界值：帧数下界方向 || NG ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R05 | M2-AI-004 || VGGT 输出整体（深度图 + npz 点云） || 单帧输入时光度一致性指标应不可用 || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || input-dir=002_computer 第 1 帧；conf_thres=3.0 || 1. 仅取 002_computer 第 1 帧建立输入目录。 / 2. 执行推理与指标计算。 / 3. 检查 G4 是否报告不可用而非给出错误数值。 || G4 因缺少帧对而报告不可用；G1–G3 仍可统计。 || G4 报告不可用（无有效帧对）；G1 相对误差 4.130e-3；G2 2.630 px；G3 深度置信均值 2.928、低置信占比 48.42%；峰值显存 6.869 GB。 || OK || 边界值：帧数最小边界 N=1 || NT ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R06 | M2-AI-005 || VGGT 输出整体（深度图 + npz 点云） || 帧数—指标单调性检验（1→2→5→9） || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || 复用 M2-AI-001 至 M2-AI-004 四档运行结果 || 1. 汇总 1、2、5、9 帧四档的 G1 相对误差与 G3 深度置信均值。 / 2. 检验指标是否随帧数单调改善。 || 帧数增加时 G1 相对误差单调下降、深度置信均值单调上升。 || G1 相对误差 4.130e-3 → 3.062e-3 → 2.093e-3 → 1.585e-3，严格单调下降；深度置信均值 2.928 → 5.092 → 6.965 → 8.125，严格单调上升；低置信占比 48.42% → 23.78% → 21.64% → 21.90%。 || OK || 场景法：趋势验证 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R07 | M2-AI-006 || VGGT 输出整体（深度图 + npz 点云） || 分辨率降为 0.5 倍的鲁棒性 || 中 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || input-dir=002_computer 9 帧等比缩放到 0.5 倍；conf_thres=3.0 || 1. 将 9 帧图像等比缩放到 0.5 倍并另存为输入目录。 / 2. 执行推理与指标计算。 / 3. 与基线对比。 || G2、G4 相对基线出现退化。 || 结论与预期相反：未见显著退化。G1 相对误差 1.579e-3；G2 2.153 px；G4 NCC 0.8729，与基线同量级。 || OK || 错误推测法：分辨率扰动 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R08 | M2-AI-007 || VGGT 输出整体（深度图 + npz 点云） || 高斯噪声 σ=10 的鲁棒性 || 中 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || input-dir=002_computer 9 帧叠加均值 0、标准差 10 的高斯噪声（0–255 尺度，随机种子 20260911）；conf_thres=3.0 || 1. 对 9 帧图像逐像素叠加高斯噪声并另存为输入目录。 / 2. 执行推理与指标计算。 / 3. 与基线对比。 || G2、G4 相对基线出现退化。 || 结论与预期相反：未见显著退化。G1 相对误差 1.766e-3；G2 2.105 px；G4 NCC 0.8759，与基线同量级。 || OK || 错误推测法：像素噪声扰动 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R09 | M2-AI-008 || VGGT 输出整体（深度图 + npz 点云） || 随机遮挡 25% 面积的鲁棒性 || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。 || input-dir=002_computer 9 帧随机贴实心矩形遮挡，累计面积约 25%（随机种子 20260911）；conf_thres=3.0 || 1. 对 9 帧图像施加约 25% 面积的随机遮挡并另存为输入目录。 / 2. 执行推理与指标计算。 / 3. 与基线对比。 || G1、G4 出现退化，低置信像素占比上升。 || 发现显著退化：G4 NCC 由 0.8729 降至 0.5536（−36.6%）；低置信占比由 21.90% 升至 40.19%（+83.5%）；深度置信均值由 8.125 降至 5.333（−34.4%）；G1 相对误差 1.841e-3，变化不大。 || OK || 错误推测法：遮挡扰动 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R10 | M2-AI-009 || VGGT 输出整体（深度图 + npz 点云） || 重复运行确定性检验 || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用；权重 model.pt 就位；已保留基线运行的 predictions.npz；RTX 3070 Laptop（8 GB 显存）。 || input-dir=002_computer 9 帧（与基线完全相同） || 1. 用相同输入、独立进程重新执行一次推理。 / 2. 逐位比较两次输出的 depth、world_points、extrinsic、intrinsic。 || 关键输出逐位一致。 || depth、world_points、extrinsic、intrinsic 四个字段的 max_abs_diff 与 mean_abs_diff 均为 0.0，完全逐位一致。 || OK || 场景法：可复现性 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R11 | M2-AI-010 || depth 深度图输出与 depth_conf 置信度 || 竖构图近景场景在默认置信阈值下的可用性 || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。vggt_input/001_watercup 含 8 张 3072×4096 竖构图图像。 || input-dir=vggt_input/001_watercup（8 帧竖构图水杯近景）；conf_thres=3.0 || 1. 执行 run_vggt_inference.py --input-dir vggt_input/001_watercup。 / 2. 以默认阈值执行 metrics.py --conf-thres 3.0。 / 3. 检查四项指标是否可统计。 || 四项指标与基线同量级，可正常统计。 || 失败。深度置信最大值仅 2.187，低于默认阈值 3.0，导致 G1/G2/G4 全部因“有效像素为 0”被跳过，且程序未给出任何降级提示。 || NG || 等价类：近景特写 / 低纹理 / 小基线场景 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R12 | M2-AI-011 || depth 深度图输出与 depth_conf 置信度 || 竖构图场景放宽置信阈值后的指标测量 || 中 || 可自动化 || 新增 || Pytorch_Vggt 环境可用；已取得 vggt_input/001_watercup 的 predictions.npz；指标计算不需要 GPU。 || 001_watercup 的 predictions.npz；conf_thres=1.0 || 1. 对同一 npz 执行 metrics.py --conf-thres 1.0。 / 2. 记录 G1–G4。 / 3. 与 002_computer 基线对比。 || 指标可统计，数值与基线同量级。 || G1 相对误差 2.973e-2（基线的 18.8 倍）；G2 平均重投影像素误差 41.447 px（19.1 倍）；G3 深度置信均值 1.118；G4 NCC 0.4919（基线 0.8729）。 || OK || 边界值：置信度阈值下探 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R13 | M2-AI-012 || depth 深度图输出与 depth_conf 置信度 || 排除裁切影响：竖构图补白成正方形后重测 || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用（Python 3.10.20 + PyTorch 2.8.0+cu128）；权重 E:\0_work\1shijian\model.pt（5.02 GB）就位；NVIDIA RTX 3070 Laptop（8 GB 显存）；已归档 vggt_input/ 下对应场景图像。vggt_input/001_watercup 原始 8 张图像。 || 001_watercup 8 帧居中补白到 4096×4096 正方形；conf_thres=1.0 || 1. 将每张图居中补白成正方形，使 crop 预处理不再发生高度裁切。 / 2. 执行推理与指标计算。 / 3. 与原竖构图结果对比。 || 若预处理裁切是退化主因，则指标应显著改善。 || 假说被否证：指标未改善。G1 相对误差 3.629e-2；G2 39.237 px；深度置信均值 1.051；G4 NCC 0.6465，甚至略差于原结果。结论：退化由场景本身（近景、低纹理、小基线）导致，裁切不是主因。 || OK || 错误推测法：控制变量定位退化成因 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R14 | M2-AI-013 || run_vggt_inference.py 推理入口（输入校验） || 空输入目录的异常处理 || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用；权重 model.pt 就位。 || 不含任何图像的空目录（0 张图像） || 1. 执行 run_vggt_inference.py --input-dir <空目录> --output-dir <输出目录>。 / 2. 观察报错信息与退出码。 / 3. 检查是否创建了输出目录。 || 给出明确的中文错误提示，以非零退出码结束，不产生垃圾产物。 || 输出“[错误] 输入目录中没有图像: <路径>”，退出码 1，未创建输出目录。 || OK || 错误推测法：异常输入 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R15 | M2-AI-014 || run_vggt_inference.py 推理入口（输入校验） || 输入目录不存在的异常处理 || 中 || 可自动化 || 新增 || Pytorch_Vggt 环境可用；权重 model.pt 就位。 || 不存在的输入目录路径 || 1. 执行 run_vggt_inference.py --input-dir <不存在的路径> --output-dir <输出目录>。 / 2. 观察报错信息与退出码。 || 给出明确的中文错误提示，以非零退出码结束。 || 输出“[错误] 输入目录不存在: <路径>”，退出码 1。 || OK || 错误推测法：异常输入 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+  R16 | M2-AI-015 || run_vggt_inference.py 推理入口（输入校验） || 损坏图像文件的异常处理 || 高 || 可自动化 || 新增 || Pytorch_Vggt 环境可用；权重 model.pt 就位。 || 内容为 not an image、扩展名为 broken.jpg 的损坏文件（1 个文件） || 1. 新建目录并放入损坏的 broken.jpg。 / 2. 执行 run_vggt_inference.py --input-dir <该目录>。 / 3. 观察报错信息、退出码与残留产物。 || 给出明确的中文错误提示，以非零退出码结束，不残留半成品产物。 || 失败。抛出未捕获的 PIL.UnidentifiedImageError 原始堆栈，退出码 1，且残留半成品输出目录（images/ 已写入、无 predictions.npz）。定位 vggt/utils/load_fn.py:140 的 Image.open 未做异常处理，登记为缺陷 DEF-M2-001。 || NG || 错误推测法：异常输入 ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  || 
+[SHEET] Introduction使用说明  dims=A1:C10  max_row=10 max_col=3
+  R01 | Introduction 使用说明 ||  || 
+  R02 | 1 || There are two sheets in the Test Case Form. One is "Information", the other is "Test Cases" sheet. 测试用例表包含两个表单：“基本信息”表单和“测试用例”表单。 || 
+  R03 | 2 || The test cases can be multilevel. 本测试用例模板支持分层。 || 
+  R04 | 3 || If project need multilevel, they can add column beside "test item" and "test case" column at "Test Cases" sheet. 项目组如果需要多级分层，可在“Test cases”页面中的“测试项”和“测试用例”之间增加列。例如增加“测试子项”。 || 
+  R05 | 4 || The number of test cases is low level test cases' number, it is automatic calculate. 测试用例的统计使用小测试用例统计，自动统计。 || 
+  R06 | 5 || The Test Case Form should not use as test record. 本测试用例表单不能作为测试记录使用。 || 
+  R07 | 6 || Test cases ID shall follow the ID rules defined in Test strategy. For example,"Project ID-UT(IT,ST)-nnn". 测试用例的编号应符合测试策略中对编号规则的要求。例如，“项目编码 -UT（或IT，ST）-nnn”。 || 
+  R08 | 7 || Test Criticality重要级别定义为：Specify High/Medium/Low.描述测试用例的重要级别：高/中/低. || 
+  R09 | 8 || Output 预期输出：Provide the expected result after performing the test提供测试执行的预期结果 || 
+  R10 | 9 || Result 实际输出:Provide the result after performing the test提供测试结果 / OK:测试通过 / POK:部分通过 / NG:不能通过 / NT:测试用例错误,测试无法执行 || 
+
+======================================================================
+DOCX: VGGT模块二测试报告
+======================================================================
+P003 | VGGT 三维重建系统
+P005 | 测试报告
+P015 | 日  期
+P016 | 版  本
+P017 | 说明
+P018 | 作  者
+P019 | 2026-09-11
+P020 | V1.0
+P021 | 依据附录4（模块二）模板编写；填入被测对象与方案选择、测试环境、15 条用例的实测执行结果、G1–G4 鲁棒性实验结论、2 个有效缺陷与 AI 反思；仅剩成员姓名与贡献度分配待补
+P022 | 【待填写：作者姓名】
+P036 | 目  录
+P037 | 1 被测对象及AI融合方案概述</w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc239678748 \h </w:instrText></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:t>3
+P038 | 2 AI实践过程与成果</w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc239678749 \h </w:instrText></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:t>3
+P039 | <w:tab w:val="right" w:leader="dot" w:pos="8296"/></w:tabs><w:rPr><w:rFonts w:asciiTheme="minorHAnsi" w:hAnsiTheme="minorHAnsi" w:eastAsiaTheme="minorEastAsia" w:cstheme="minorBidi"/><w:noProof w:val="1"/><w:szCs w:val="22"/></w:rPr></w:pPr><w:r><w:fldChar w:fldCharType="begin" w:fldLock="0" w:dirty="0"/></w:r><w:r><w:instrText>HYPERLINK \l "_Toc239678750"</w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate" w:fldLock="0" w:dirty="0"/></w:r><w:r><w:rPr><w:rStyle w:val="00000d"/><w:rFonts w:hint="eastAsia"/><w:noProof w:val="1"/></w:rPr><w:t>2.1 实践过程</w:r><w:r><w:rPr><w:noProof w:val="1"
+P040 | <w:tab w:val="right" w:leader="dot" w:pos="8296"/></w:tabs><w:rPr><w:rFonts w:asciiTheme="minorHAnsi" w:hAnsiTheme="minorHAnsi" w:eastAsiaTheme="minorEastAsia" w:cstheme="minorBidi"/><w:noProof w:val="1"/><w:szCs w:val="22"/></w:rPr></w:pPr><w:r><w:fldChar w:fldCharType="begin" w:fldLock="0" w:dirty="0"/></w:r><w:r><w:instrText>HYPERLINK \l "_Toc239678751"</w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate" w:fldLock="0" w:dirty="0"/></w:r><w:r><w:rPr><w:rStyle w:val="00000d"/><w:rFonts w:hint="eastAsia"/><w:noProof w:val="1"/></w:rPr><w:t>2.2 新增测试成果</w:r><w:r><w:rPr><w:noProof w:val="
+P041 | <w:tab w:val="right" w:leader="dot" w:pos="8296"/></w:tabs><w:rPr><w:rFonts w:asciiTheme="minorHAnsi" w:hAnsiTheme="minorHAnsi" w:eastAsiaTheme="minorEastAsia" w:cstheme="minorBidi"/><w:noProof w:val="1"/><w:szCs w:val="22"/></w:rPr></w:pPr><w:r><w:fldChar w:fldCharType="begin" w:fldLock="0" w:dirty="0"/></w:r><w:r><w:instrText>HYPERLINK \l "_Toc239678752"</w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate" w:fldLock="0" w:dirty="0"/></w:r><w:r><w:rPr><w:rStyle w:val="00000d"/><w:rFonts w:hint="eastAsia"/><w:noProof w:val="1"/></w:rPr><w:t>2.3 测试环境</w:r><w:r><w:rPr><w:noProof w:val="1"
+P042 | 3 AI反思与批判</w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc239678753 \h </w:instrText></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:t>3
+P043 | 6 小组成员贡献度</w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:instrText xml:space="preserve"> PAGEREF _Toc239678754 \h </w:instrText></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:webHidden w:val="1"/></w:rPr><w:t>4
+P045 | 1 被测对象及AI融合方案概述
+P046 | 被测软件系统
+P047 | 被测系统为 VGGT（Visual Geometry Grounded Transformer）——一个前馈式三维几何重建大模型：输入多视角图像序列，单次前馈即同时输出逐帧深度图、相机内参与外参、世界坐标点云（点图）以及跟踪特征。整体架构为：以 DINOv2 为骨干的 ViT（10 亿参数级）→ 交替注意力聚合器（帧内注意力与全局注意力交替）→ 相机头、深度头、点图头、跟踪头四个预测分支。部署形态为仓库 vggt-main/，另附中文可视化程序 demo_gradio_cn.py。
+P048 | 本小组选择的测试模块是整个 VGGT 算法的输出层，即：
+P049 | 被测输出
+P050 | 对应字段
+P051 | 形状
+P052 | 说明
+P053 | 深度图
+P054 | depth / depth_conf
+P055 | (S,H,W,1) / (S,H,W)
+P056 | 相机 z 向深度及逐像素置信度
+P057 | npz 点云（点图头）
+P058 | world_points / world_points_conf
+P059 | (S,H,W,3) / (S,H,W)
+P060 | 点图头直接回归的世界坐标
+P061 | npz 点云（深度反投影）
+P062 | world_points_from_depth
+P063 | (S,H,W,3)
+P064 | 由深度与位姿反投影得到的世界坐标
+P065 | 相机参数
+P066 | extrinsic / intrinsic
+P067 | (S,3,4) / (S,3,3)
+P068 | OpenCV 约定 world→cam；内参为像素单位，主点在图像中心
+P069 | 代码规模（实测统计）：vggt/ 包共 7419 行 Python 代码，其中预测头 vggt/heads/ 为 1848 行；被测链路涉及的关键文件为 vggt/models/vggt.py（97 行）、vggt/utils/geometry.py（323 行）、vggt/utils/load_fn.py（230 行）、vggt/utils/pose_enc.py（124 行）、visual_util.py（457 行）。本组自建的测试工具共 1369 行（run_vggt_inference.py 411 行、metrics.py 491 行、cv2_unicode.py 134 行、tools/robustness_experiments.py 261 行、tools/make_depth_contact_sheet.py 72 行）。
+P070 | 典型产物样例：vggt_output/002_computer/，含 9 张伪彩色深度图、两个预测分支的 GLB 场景、predictions.npz（104.6 MB）与 run_info.json。
+P071 | 方案选择及理由
+P072 | 本组选择方案 1（测试对象含 AI），未采用方案 2。理由如下：
+P073 | VGGT 本身就是被测 AI 模型，其输出（深度图、npz 点云）恰好具备 AI 系统的典型特征——无可信真值、结果非确定、失败表现为静默退化，是“测 AI”的合适对象；
+P074 | 本组在模块一已完成其下游坐标转换模块的确定性测试，模块二自然延伸到上游的 AI 推理输出，两个模块形成完整链路；
+P075 | 本组已具备不依赖真值的几何自洽性指标（G1–G4）与批量推理工具，可在有限的显存预算下系统化地测试输出鲁棒性。
+P076 | 被测 AI 模块与测试难点
+P077 | 项
+P078 | 说明
+P079 | 模型类型
+P080 | ViT 类前馈几何重建模型（回归式，非生成式），10 亿参数级；权重 model.pt 约 5.02 GB
+P081 | 任务场景
+P082 | 由 N 张多视角图像重建场景几何，输出深度、相机位姿与稠密点云
+P083 | 输入规格
+P084 | 图像序列；预处理 load_and_preprocess_images(mode="crop") 统一为宽 518、高 14 对齐（实测 9 帧 → (9,3,392,518)）；实测场景帧数 1–25
+P085 | 输出规格
+P086 | 见上表；另含 images（输入归一化结果）与跟踪特征
+P087 | 测试难点：
+P088 | 没有预期输出：同一场景不存在唯一的“正确”深度或点云，无法用等值断言判定对错；
+P089 | 结果确定性：实测在固定输入下逐位可复现（两个独立进程的 depth、world_points、extrinsic、intrinsic 完全一致）；但第一帧被定义为场景参考系，跨运行、跨场景的绝对位姿不在同一坐标系，只能比较相对位姿；
+P090 | 尺度不定：单目无标定输入下重建尺度不固定，误差须先按场景尺度（本组取高置信点云包围盒对角线）归一化；
+P091 | 资源门槛高：峰值显存随帧数增长（单帧 6.869 GB → 5 帧 7.662 GB → 9 帧 8.467 GB），9 帧已达 8 GB 显存上限，长序列与扰动矩阵实验成本高；
+P092 | 评价依赖外部真值：精度类指标需要 CO3Dv2、DTU 等真值数据集；本组改用无真值自洽性指标，代价是“自洽”不等于“正确”。
+P093 | 2 AI实践过程与成果
+P094 | 2.1 实践过程
+P095 | 测试用例设计思路
+P096 | 针对“无可信真值、无法用等值断言”的特点，本模块采用无真值几何自洽性思路：不比对真值，而是检验模型自身各输出分支之间是否互相自洽。四个自洽性指标由 metrics.py 计算：
+P097 | 指标
+P098 | 比较对象
+P099 | 计算方式
+P100 | 观测量
+P101 | G1 点图 vs 深度反投影
+P102 | world_points 与 world_points_from_depth
+P103 | 逐像素欧氏距离
+P104 | 平均 L2 误差、按场景尺度归一化的相对误差
+P105 | G2 点图 vs 相机头
+P106 | world_points 与 extrinsic / intrinsic
+P107 | 将点图投影回自身像素网格后与像素坐标、深度比较
+P108 | 重投影像素误差、深度相对误差
+P109 | G3 置信度
+P110 | depth_conf / world_points_conf
+P111 | 置信度分布统计
+P112 | 均值与分位数、低置信像素占比
+P113 | G4 光度一致性
+P114 | 相邻帧图像
+P115 | 按预测几何重投影后比较
+P116 | L1、NCC、有效率
+P117 | 补充说明：环闭合类检验对本模型无效——VGGT 一次前馈即产出全部帧的位姿，各帧天然自洽；需要独立第二次预测时改用分段一致性 G5：人为切分输入窗口，比较重叠帧的相对位姿。
+P118 | 鲁棒性扰动矩阵
+P119 | 维度
+P120 | 扰动方式
+P121 | 观测量
+P122 | 帧数
+P123 | N = 1 / 2 / 5 / 10 / 20 / 50
+P124 | G1–G4 随 N 的变化曲线
+P125 | 帧顺序
+P126 | 打乱输入顺序
+P127 | 重叠帧相对位姿的偏差
+P128 | 图像质量
+P129 | 高斯噪声 σ、JPEG 质量、运动模糊、亮度与对比度变换
+P130 | G2、G4 退化幅度
+P131 | 遮挡
+P132 | 随机遮挡 10% / 25% / 50% 面积
+P133 | G1、G4 退化幅度
+P134 | 分辨率
+P135 | 原图 1× / 0.5× / 0.25×
+P136 | G2、G4 退化幅度
+P137 | 场景难度
+P138 | 低纹理、弱重叠、大视角变化、重复纹理
+P139 | G3 低置信占比、G4 有效率
+P140 | 执行结果
+P141 | 本节汇总鲁棒性实验结果。全部实验由 tools/robustness_experiments.py 一键批量执行：生成帧数与扰动变体 → 调 run_vggt_inference.py 推理 → 调 metrics.py 计算 G1–G4 → 汇总为 vggt_output/exp/summary.json 与 summary.md。基准场景为 002_computer（9 帧横构图教室场景），共 7 次推理（含 1 次基线重跑）。
+P142 | 帧数与扰动变体汇总
+P143 | 变体
+P144 | 帧数
+P145 | 峰值显存(GB)
+P146 | G1 相对误差
+P147 | G2 像素误差(px)
+P148 | G2 <5px 占比
+P149 | G3 深度置信均值
+P150 | G3 低置信占比
+P151 | G4 NCC
+P152 | N1（前 1 帧）
+P153 | 1
+P154 | 6.869
+P155 | 4.130e-3
+P156 | 2.630
+P157 | 0.9871
+P158 | 2.928
+P159 | 0.4842
+P160 | 不可用
+P161 | N2（前 2 帧）
+P162 | 2
+P163 | 6.997
+P164 | 3.062e-3
+P165 | 2.710
+P166 | 0.9512
+P167 | 5.092
+P168 | 0.2378
+P169 | 0.9472
+P170 | N5（前 5 帧）
+P171 | 5
+P172 | 7.662
+P173 | 2.093e-3
+P174 | 2.236
+P175 | 0.9974
+P176 | 6.965
+P177 | 0.2164
+P178 | 0.9153
+P179 | res50（0.5 倍分辨率）
+P180 | 9
+P181 | 8.467
+P182 | 1.579e-3
+P183 | 2.153
+P184 | 0.9947
+P185 | 7.988
+P186 | 0.2205
+P187 | 0.8729
+P188 | noise10（高斯噪声 σ=10）
+P189 | 9
+P190 | 8.467
+P191 | 1.766e-3
+P192 | 2.105
+P193 | 0.9930
+P194 | 7.484
+P195 | 0.2321
+P196 | 0.8759
+P197 | occ25（遮挡 25% 面积）
+P198 | 9
+P199 | 8.467
+P200 | 1.841e-3
+P201 | 2.193
+P202 | 0.9955
+P203 | 5.333
+P204 | 0.4019
+P205 | 0.5536
+P206 | det2（原始 9 帧重跑，基线）
+P207 | 9
+P208 | 8.467
+P209 | 1.585e-3
+P210 | 2.171
+P211 | 0.9945
+P212 | 8.125
+P213 | 0.2190
+P214 | 0.8729
+P215 | 三条主要结论
+P216 | 帧数效应显著且单调。 帧数由 1 增至 9，G1 相对误差由 4.130e-3 单调降至 1.585e-3，深度置信均值由 2.928 单调升至 8.125，低置信像素占比由 48.42% 降至 21.90%。说明多视角冗余是本模型自洽性的主要来源；单帧时 G4（光度一致性）因缺少帧对而不可用，与预期一致。
+P217 | 模型对像素噪声与降采样不敏感，对遮挡敏感。 σ=10 的高斯噪声与 0.5 倍分辨率下，各项指标与基线基本同量级（G4 NCC 分别为 0.8759、0.8729，基线 0.8729）；而遮挡 25% 面积使 NCC 由 0.8729 降到 0.5536（−36.6%）、低置信占比由 21.90% 升到 40.19%（+83.5%）、深度置信均值由 8.125 降到 5.333（−34.4%）。这是全部变体中唯一出现显著退化的项。
+P218 | 确定性成立。 用独立进程、相同输入重复推理一次，depth、world_points、extrinsic、intrinsic 四个关键输出与首次运行逐位一致（max_abs_diff = 0.0，mean_abs_diff = 0.0）。因此本模型在固定输入下是确定性的，"浮点与并行导致结果不可复现"的担心不成立；限制可比性的只剩"第一帧被定义为场景参考系"这一约定。
+P219 | 测量一致性说明：本表数值来自同一批次、同一机器状态下的 7 次运行，内部可比。需要说明的是，最早两次手动运行（001_watercup 与 002_computer）测得的前馈耗时为 27–34 s，而本批次 9 帧运行稳定在 16.6–17.7 s，相差近一倍；两次测量之间除机器供电与散热状态外没有其他变量。本报告的性能结论以本批次测量为准，并建议后续用例在固定供电状态下复测。
+P221 | 基准场景产物与性能核对
+P222 | 项
+P223 | 实测值
+P224 | 已跑通场景
+P225 | 002_computer（9 帧横构图）、001_watercup（8 帧竖构图），另含 7 个扰动变体
+P226 | 预处理后张量形状
+P227 | (9, 3, 392, 518)
+P228 | 深度图输出形状
+P229 | (9, 392, 518, 1)
+P230 | 模型加载耗时
+P231 | 9.78 – 11.48 s（7 次运行）
+P232 | 单次前馈推理耗时
+P233 | 单帧 4.88 s；9 帧 16.62 – 17.72 s
+P234 | 端到端耗时
+P235 | 9 帧约 40 s（含权重加载与产物写盘）；首次冷启动 62.2 s
+P236 | 峰值显存
+P237 | 单帧 6.869 GB → 5 帧 7.662 GB → 9 帧 8.467 GB（随帧数线性增长）
+P238 | 产物完整性
+P239 | 深度图张数等于帧数（9/9）；predictions.npz 可读（104.6 MB）；两个分支 GLB 均为合法 glTF 且可加载
+P240 | 几何数值抽检
+P241 | extrinsic 首帧与单位阵最大偏差 1.2e-4；intrinsic 主点 (259, 259) 即图像中心；depth 全部有限
+P242 | 与传统模块测试的差异分析
+P243 | 对比维度
+P244 | 模块一（坐标转换模块）
+P245 | 模块二（VGGT 输出：深度图与 npz 点云）
+P246 | 被测对象性质
+P247 | 纯函数，确定性
+P248 | AI 模型输出，概率性、非确定性
+P249 | 期望输出来源
+P250 | 需求文档与数学定义
+P251 | 模型其他输出分支的自洽性、多视角输入的冗余
+P252 | 断言形式
+P253 | 等值与边界断言，可判定单点对错
+P254 | 区间、趋势与一致性断言，无法判定单点对错
+P255 | 失败表现
+P256 | 抛异常或返回错误值
+P257 | 静默的质量退化（尺度漂移、点云撕裂、低置信区扩大）
+P258 | 执行成本
+P259 | 毫秒级，无需 GPU
+P260 | 单场景数十秒且占满 8 GB 显存，必须有 GPU
+P261 | 共同点
+P262 | 统一一键入口、统一归档产物与运行元信息、可复现
+P263 | 同左
+P264 | 2.2 新增测试成果
+P265 | 本模块的 AI 相关测试用例清单见随交付的 Excel《VGGT 模块二测试用例清单》（附录 1 格式，共 15 条）。基准场景为自建实拍场景 002_computer（9 帧横构图），并新引入 001_watercup（8 帧竖构图）做跨场景对照。下表为用例、观测指标与实测执行结果：
+P266 | 编号
+P267 | 场景
+P268 | 配置
+P269 | 观测指标
+P270 | 预期
+P271 | 执行结果
+P272 | M2-AI-001
+P273 | 002_computer（9 帧）
+P274 | 默认参数，conf_thres=3.0
+P275 | G1–G4 + 耗时 + 显存
+P276 | 基线，记录四项指标数值
+P277 | 通过。G1 相对误差 1.585e-3、G2 像素误差 2.171 px、G4 NCC 0.8729、端到端 40.3 s、峰值显存 8.467 GB
+P278 | M2-AI-002
+P279 | 002_computer
+P280 | 前 5 帧
+P281 | G1–G4
+P282 | 帧数减少后指标退化
+P283 | 通过（发现退化）。G1 相对误差 2.093e-3、深度置信均值 6.965、低置信占比 21.64%
+P284 | M2-AI-003
+P285 | 002_computer
+P286 | 前 2 帧
+P287 | G1–G4
+P288 | 进一步退化
+P289 | 通过（发现退化）。G1 相对误差 3.062e-3、置信均值 5.092、低置信占比 23.78%
+P290 | M2-AI-004
+P291 | 002_computer
+P292 | 单帧
+P293 | G1–G3
+P294 | G4 应报"不可用"
+P295 | 通过。G4 报告不可用（无帧对）；置信均值 2.928、低置信占比 48.42%
+P296 | M2-AI-005
+P297 | 002_computer
+P298 | 帧数 1 → 2 → 5 → 9 逐档
+P299 | G1–G4 曲线
+P300 | 单调改善
+P301 | 通过。G1 相对误差 4.130e-3 → 3.062e-3 → 2.093e-3 → 1.585e-3，单调下降；置信均值单调上升
+P302 | M2-AI-006
+P303 | 002_computer
+P304 | 分辨率降为 0.5 倍
+P305 | G2、G4
+P306 | 单调退化
+P307 | 通过（未退化）。G2 2.153 px、G4 NCC 0.8729，与基线同量级
+P308 | M2-AI-007
+P309 | 002_computer
+P310 | 高斯噪声 σ=10
+P311 | G2、G4
+P312 | 单调退化
+P313 | 通过（未退化）。G2 2.105 px、G4 NCC 0.8759，与基线同量级
+P314 | M2-AI-008
+P315 | 002_computer
+P316 | 随机遮挡 25% 面积
+P317 | G1、G4
+P318 | 退化，低置信占比上升
+P319 | 通过（发现显著退化）。G4 NCC 0.5536（−36.6%）、低置信占比 40.19%（+83.5%）
+P320 | M2-AI-009
+P321 | 002_computer
+P322 | 独立进程重复运行，同输入
+P323 | 关键输出逐位一致
+P324 | 可复现
+P325 | 通过。depth、world_points、extrinsic、intrinsic 的 max_abs_diff = 0.0
+P326 | M2-AI-010
+P327 | 001_watercup（8 帧竖构图）
+P328 | 默认参数，conf_thres=3.0
+P329 | G1–G4
+P330 | 与基线同量级
+P331 | 失败。深度置信最大值仅 2.187，低于阈值 3.0，G1/G2/G4 全部因"有效像素为 0"被跳过
+P332 | M2-AI-011
+P333 | 001_watercup
+P334 | 置信阈值放宽到 1.0
+P335 | G1–G4
+P336 | 得到可用指标
+P337 | 通过（发现退化）。G1 相对误差 2.973e-2（基线的 18.8 倍）、G2 像素误差 41.447 px（19.1 倍）、G4 NCC 0.4919
+P338 | M2-AI-012
+P339 | 001_watercup
+P340 | 补白成正方形（4096×4096）规避裁切
+P341 | G1–G4
+P342 | 若裁切是退化主因则指标应改善
+P343 | 通过（否证假说）。指标未改善：G1 3.629e-2、G2 39.237 px、置信均值 1.051；退化由场景本身导致，裁切不是主因
+P344 | M2-AI-013
+P345 | 空目录
+P346 | 0 张图像
+P347 | 是否崩溃、报错信息
+P348 | 友好报错，非零退出码
+P349 | 通过。提示"[错误] 输入目录中没有图像"，退出码 1，未创建输出目录
+P350 | M2-AI-014
+P351 | 不存在的目录
+P352 | 路径无效
+P353 | 报错信息
+P354 | 友好报错，非零退出码
+P355 | 通过。提示"[错误] 输入目录不存在"，退出码 1
+P356 | M2-AI-015
+P357 | 损坏图像
+P358 | 扩展名为 .jpg 但内容非图像
+P359 | 报错信息
+P360 | 友好报错，非零退出码
+P361 | 失败。抛出未捕获的 PIL.UnidentifiedImageError 原始堆栈，退出码 1，且残留半成品输出目录（images/ 已写入、无 predictions.npz）。见 DEF-M2-001
+P362 | 说明：M2-AI-006、M2-AI-007 的预期为"退化"，实测未出现退化，因此判定为用例通过但结论与预期相反，属于有效的鲁棒性结论而非缺陷；M2-AI-010 与 M2-AI-015 为失败用例，分别对应置信度阈值跨场景失效与损坏图像异常处理不一致两项发现，其中 M2-AI-015 已登记为缺陷 DEF-M2-001。
+P363 | 执行结果汇总
+P364 | 本模块 15 条用例全部执行完毕，通过 13 条、失败 2 条，无阻塞用例。
+P365 | 统计项
+P366 | 数值
+P367 | 用例总数
+P368 | 15
+P369 | 已执行
+P370 | 15
+P371 | 通过
+P372 | 13
+P373 | 失败
+P374 | 2（M2-AI-010 默认置信阈值下指标全部失效、M2-AI-015 损坏图像未捕获异常）
+P375 | 有效缺陷
+P376 | 2（DEF-M2-001、DEF-M2-002）
+P377 | 关键数值（详见 2.1 节与 2.2 节用例表）：单场景 9 帧端到端约 40 s，峰值显存 8.467 GB，深度图产物 9/9 张、predictions.npz 可读、GLB 为合法 glTF；独立进程重复运行结果逐位一致；遮挡 25% 面积时 G4 NCC 由 0.873 降至 0.554，是唯一显著退化项；近景特写场景（001_watercup）G2 重投影误差 41.4 px，比中等尺度场景（002_computer，2.17 px）差 19 倍。
+P378 | AI 辅助与人工改进的对比
+P379 | 【不适用】本栏为附录 4 模板中方案 2（AI 测）的内容。本组选择方案 1（测 AI），AI 模型在本模块中是被测对象而非测试手段，因此不存在"AI 辅助测试的效果对比"。本组对被测 AI 输出质量的评价与批判见第 3 节 AI 反思与批判。
+P380 | 【不适用】本栏为附录 4 模板中方案 2（AI 测）的内容。本组选择方案 1（测 AI），AI 模型在本模块中是被测对象而非测试手段，因此不存在“AI 辅助测试的效果对比”。本组对被测 AI 输出质量的评价与批判见第 3 节 AI 反思与批判。
+P381 | 2.3 测试环境
+P382 | 硬件与操作系统
+P383 | 项
+P384 | 值
+P385 | 操作系统
+P386 | Windows 11 家庭中文版（10.0.26100）
+P387 | 处理器
+P388 | 12th Gen Intel(R) Core(TM) i7-12700H
+P389 | 内存
+P390 | 31.8 GB
+P391 | 显卡
+P392 | NVIDIA GeForce RTX 3070 Laptop GPU（显存 8 GB，compute capability 8.6）
+P393 | 显卡驱动
+P394 | 32.0.16.1047
+P395 | 支撑软件
+P396 | 项
+P397 | 值
+P398 | 运行环境
+P399 | Anaconda 环境 Pytorch_Vggt，解释器 D:\anaconda3\envs\Pytorch_Vggt\python.exe
+P400 | Python
+P401 | 3.10.20
+P402 | PyTorch
+P403 | 2.8.0+cu128（CUDA 12.8）
+P404 | NumPy
+P405 | 2.2.6
+P406 | OpenCV
+P407 | opencv-python 4.13.0
+P408 | 可视化
+P409 | Gradio（中文界面 demo_gradio_cn.py）
+P410 | GLB 导出依赖
+P411 | trimesh / pygltflib（随仓库依赖安装）
+P412 | 模型权重
+P413 | model.pt，约 5.02 GB，置于工程目录的上一级，不纳入 Git 版本管理
+P414 | 输入数据
+P415 | 自建实拍场景：vggt_input/001_watercup（8 帧竖构图水杯）、vggt_input/002_computer（9 帧横构图教室与笔记本场景）。
+P416 | 公开场景（复制自 vggt-main/examples/）：kitchen（25 帧）、llff_fern（20 帧）、llff_flower（25 帧）、room（8 帧）、single_cartoon（1 帧）、single_oil_painting（1 帧），另含 8 段输入视频。
+P417 | 测试代码的运行条件
+P418 | 批量推理 run_vggt_inference.py 与可视化程序一致，均需上述 CUDA 环境与模型权重；指标计算 metrics.py 为离线纯 NumPy 计算，不需要 GPU、也不需要模型权重，可直接对已归档的 predictions.npz 复算。
+P419 | 单元测试与自动化框架：本模块未引入 pytest 等第三方测试框架，测试以“命令行驱动脚本 + JSON 结果归档”的方式实现，可用一条命令一键复跑全部用例——tools/robustness_experiments.py 会依次完成“生成帧数与扰动变体 → 调用 run_vggt_inference.py 推理 → 调用 metrics.py 计算指标 → 汇总为 vggt_output/exp/summary.json 与 summary.md”；异常输入用例由 run_vggt_inference.py 直接以非零退出码（1）暴露，便于接入持续集成判定。
+P420 | 为保证可复现，所有用例的输入图像副本、产物与运行元信息统一归档在 vggt_output/<场景>/ 下，元信息（帧数、耗时、峰值显存、GLB 导出参数）写入 run_info.json。
+P421 | 3 AI反思与批判
+P422 | 被测 AI 做对了什么
+P423 | 在 002_computer（9 帧教室与笔记本场景）上模型表现良好：G1（点图与深度反投影两条独立路径得到的世界坐标）平均 L2 误差 3.988e-3，按场景尺度（高置信点云包围盒对角线 2.516）归一化后相对误差仅 0.159%；G2（点图按相机参数投影回自身）平均重投影像素误差 2.171 px，99.45% 的像素落在 5 px 以内；G4 光度一致性 NCC 均值 0.873，最低 0.643；深度置信均值 8.125、最大值 16.993。相机头输出满足强先验：extrinsic 首帧与单位阵最大偏差 1.2e-4（浮点噪声量级），intrinsic 主点恰在图像中心 (259, 259)。另外，同一组输入用两个独立进程重复推理，depth、world_points、extrinsic、intrinsic 逐位一致（max_abs_diff = 0.0），说明模型在固定输入下完全确定性、可复现性良好。
+P424 | 被测 AI 做错了什么
+P425 | 第一，场景依赖显著，近景特写场景整体退化约一个数量级：同为 8–9 帧，001_watercup（3072×4096 竖构图水杯特写）相对 002_computer（横构图教室场景），G1 相对误差 2.973e-2 对 1.585e-3（差 18.8 倍）、G2 重投影误差 41.447 px 对 2.171 px（差 19.1 倍）、G4 NCC 0.492 对 0.873、深度置信均值 1.118 对 8.125。第二，置信度绝对值随场景漂移，固定阈值失效：002_computer 的深度置信最大值为 16.993，而 001_watercup 只有 2.187，在默认阈值 3.0 下 001_watercup 的置信度全部低于阈值，导致 G1/G2/G4 三个指标全部被判为“有效像素为 0、不可统计”，而模型本身不给出任何降级提示，使用者很容易误以为“测试通过了”。第三，对遮挡敏感、对噪声与降采样不敏感：遮挡 25% 面积使 G4 NCC 下降 36.6%、低置信占比上升 83.5%，而同强度的像素噪声与 0.5 倍降采样几乎没有影响；推测原因是遮挡直接破坏了多视角对应关系，而像素噪声与降采样只改变外观细节，DINOv2 骨干对这类低层扰动本就鲁棒。第四，输入异常处理不一致：空目录、目录不存在都有明确中文报错，但损坏的图像文件会让流程抛出原始异常堆栈（见 DEF-M2-00
+P426 | 预处理裁切的影响已单独验证（M2-AI-012）。001_watercup 原图为 3072×4096（宽高比 0.75），crop 模式会先把宽缩到 518、高算得 686，再把高度中心裁到 518，即纵向丢弃 24.5% 的视野，且没有任何提示。为区分“裁切导致”与“场景本身难”两个可能原因，本组把同一批图补白成 4096×4096 正方形使其不再发生裁切后重跑：G1 相对误差由 2.973e-2 变为 3.629e-2、G2 像素误差由 41.447 px 变为 39.237 px、G4 NCC 由 0.492 变为 0.647、深度置信均值由 1.118 变为 1.051——指标没有改善，置信度甚至略降。结论：退化主要由场景本身（近景、低纹理、小基线）导致，裁切不是主因；但裁切本身仍是独立缺陷（静默丢弃近四分之一视野、输出与输入视野不一致却无提示），记为 DEF-M2-002。
+P427 | 单目无标定输入下重建尺度不固定，导致跨运行的绝对几何量不可直接比较；
+P428 | 中文路径下 OpenCV 静默失败，导致可视化产物缺失（与模型权重无关，但属于 AI 工程链路的可靠性问题，已在模块一记录为 DEF-M1-001）；
+P429 | 失败是“静默”的，这是本模块最值得强调的一点。001_watercup 场景下程序照常输出深度图、照常导出 GLB、照常打印“全部完成”，但 G1 相对误差已恶化 18.8 倍、点图与相机的重投影误差达到 41.4 px。全程没有任何异常、没有任何告警，只有把指标算出来才能发现问题。这正是 AI 系统测试区别于传统确定性测试的核心难点。
+P430 | 测试 AI 系统的挑战
+P431 | 没有预期输出：同一场景不存在唯一的“正确”深度或点云，无法用等值断言；
+P432 | 结果确定性：实测结果与最初的担心相反——用独立进程、相同输入重复推理一次，depth、world_points、extrinsic、intrinsic 四个关键输出逐位一致（max_abs_diff = 0.0），说明模型在固定输入下是确定性的。真正限制可比性的不是浮点不确定性，而是“第一帧被定义为场景参考系”这一约定：跨运行、跨场景的绝对位姿不在同一坐标系，只能比较相对位姿。
+P433 | 尺度不定：重建尺度不固定，误差必须先按场景尺度（本组取高置信点云包围盒对角线）归一化后才可横向比较；
+P434 | 资源门槛高：峰值显存随帧数增长（单帧 6.869 GB → 5 帧 7.662 GB → 9 帧 8.467 GB），9 帧时已达 8 GB 显存的物理上限，因此长序列与大规模扰动矩阵的实验成本很高；本组 7 个变体的一次批量执行耗时 5 min 34 s。
+P435 | 评价依赖外部真值：精度类指标需要 CO3Dv2、DTU 等真值数据集；本组改用无真值几何自洽性指标绕开这一依赖，但代价是“自洽”不等于“正确”。
+P436 | AI 系统能否通过测试证明“正确”
+P437 | 不能断言“绝对正确”，只能给出**限定条件下的可用性结论**。理由有三：其一，本组的自洽性指标检验的是模型各输出分支之间的内部一致性，而系统性偏差（全局尺度错误、整体深度偏斜）可以整体自洽地存在，无法被自洽性指标发现——本组实测到了“自洽性尚可但结果确实不可用”的例子：001_watercup 放宽阈值后 G1 相对误差 2.97e-2 属可接受量级，但 G2 重投影误差已达 41.4 px，说明只看单一指标会误判。其二，指标本身依赖置信度阈值，而置信度绝对值随场景漂移一个数量级（均值 1.12 对 8.12），不存在跨场景通用的阈值，因此“通过/不通过”的判定必须连同阈值一起声明。其三，本组实测模型是确定性的，“结果不稳定”不构成障碍；但“没有真值”依然构成障碍——自洽性是必要条件，不是充分条件。因此本组的结论形式是：在指定场景、帧数 N、置信度阈值 c 与扰动强度 d 的条件下，G1–G4 落在何种上界之内。就本次测得的范围而言：在 9 帧、中等尺度、纹理充分的室内场景（002_computer）下，模型输出可用于三维重建（G1 相对误差小于 0.2%，G2 重投影像素误差小于 5 px 的像素占 99.45%）；而在近景特写、低纹理、小基线的场景（001_watercup）下，配套默认阈值 3.0 完全不可用，把阈值放宽到 1.0 后重投影误差仍有 41.4 px，不建议直接
+P438 | 4 缺陷分析
+P439 | 本模块共发现并复现 2 个有效缺陷，均位于被测 AI 推理链路的输入处理环节：DEF-M2-001 为异常处理不一致（损坏图像导致未捕获异常），DEF-M2-002 为静默信息丢失（竖构图被裁切 24.5% 且无提示）。
+P440 | 缺陷编号
+P441 | 缺陷现象
+P442 | 关联用例
+P443 | 严重程度
+P444 | 复现步骤
+P445 | 修复与验证情况
+P446 | DEF-M2-001
+P447 | 输入目录中存在损坏的图像文件（扩展名为 .jpg 但内容非图像）时，推理流程抛出未捕获的 PIL.UnidentifiedImageError 原始堆栈，而“空目录”“目录不存在”两种情况都有友好中文提示，异常处理不一致；失败后还残留半成品输出目录（images/ 已写入、无 predictions.npz）
+P448 | M2-AI-015
+P449 | 中（可用性与一致性）
+P450 | ① 新建目录并放入内容为 not an image、扩展名为 broken.jpg 的文件；② 执行 run_vggt_inference.py --input-dir <该目录> --output-dir <输出目录>；③ 观察控制台输出与退出码
+P451 | 定位：vggt/utils/load_fn.py:140 的 Image.open 未捕获异常。修复验证：待修复后复跑 M2-AI-015，应得到友好中文报错、退出码 1 且不残留半成品目录
+P452 | DEF-M2-002
+P453 | load_and_preprocess_images(mode="crop") 对长宽比非 1:1 的输入静默裁切：竖构图（3:4）输入会被中心裁切，纵向视野丢弃 24.5%，程序不告警，输出深度图与点云的视野与输入图像不一致
+P454 | M2-AI-012
+P455 | 中（静默信息丢失）
+P456 | ① 准备 3072×4096 竖构图图像序列；② 执行 run_vggt_inference.py；③ 观察日志中“预处理后张量形状”为 (N,3,518,518)，与输入视野不符；④ 对照：补白成 4096×4096 后重跑，同样得到 (N,3,518,518) 但不发生裁切
+P457 | 定位：vggt/utils/load_fn.py 的 crop 分支高度中心裁切。修复验证：待修复后复跑，日志应出现裁切告警或改用 pad 模式
+P458 | 两条缺陷的完整复现记录（测试环境、复现步骤、实际结果、定位结论、临时规避与修复建议）见下；失败现场与运行日志保存在 vggt_output/exp/_abnormal/ 下。
+P459 | DEF-M2-001（异常处理不一致）：当输入目录中存在损坏的图像文件（扩展名为 .jpg 但内容非图像）时，推理流程抛出未捕获的 PIL.UnidentifiedImageError 原始堆栈，而不是像“空目录”“目录不存在”那样给出友好提示；且失败后残留半成品输出目录（images/ 已写入、无 predictions.npz）。定位：vggt/utils/load_fn.py:140 的 Image.open(image_path) 未做异常处理，异常直接穿透到调用方；建议包一层异常处理，给出“第 N 张图像无法解码：<路径>”的中文提示后统一退出，并清理已写入的半成品目录。
+P460 | DEF-M2-002（静默信息丢失）：load_and_preprocess_images(mode="crop") 对长宽比非 1:1 的输入静默裁切。竖构图（3:4，3072×4096）输入会先把宽缩到 518、高算得 686，再把高度中心裁到 518，即纵向视野丢弃 24.5%（上下各 12.2%），程序既不告警也不在产物中标注有效区域，输出的深度图与点云视野与输入图像不一致；对照实验（M2-AI-012）表明该裁切不是本次质量退化的主因，但作为静默信息丢失仍属有效缺陷。定位：vggt/utils/load_fn.py 的 crop 分支（新高度大于 518 时中心裁切）；建议改为默认 pad 模式，或至少打印“已裁切 xx% 纵向视野”的告警并在 run_info.json 中记录有效区域范围。
+P461 | 【已修复项，不计入本模块缺陷】可视化程序传入中文预测分支名（界面下拉为“点云图分支”）时，visual_util.predictions_to_glb 依赖 "Pointmap" in prediction_mode 选择分支，中文永远不匹配而静默落到深度图分支。该问题已由本组在 demo_gradio_cn.py 中通过 PREDICTION_MODE_MAP 与 normalize_prediction_mode 修复（第 110–130、428、530 行），实测两个分支的 GLB 产物已可正确区分，故不计入本模块的有效缺陷。
+P462 | 6 小组成员贡献度
+P463 | 本模块由小组【待填写：人数】名成员共同完成。各成员承担的具体任务、编写的代码行数与发现的缺陷数如下表，工作量占比之和为 100%。
+P464 | 成员
+P465 | 承担的具体任务
+P466 | 代码行数
+P467 | 发现缺陷数
+P468 | 工作量占比
+P469 | 【待填写】
+P470 | 【待填写：如 被测对象分析、测试方案与用例设计】
+P471 | 【待填写】
+P472 | 【待填写】
+P473 | 【待填写】%
+P474 | 【待填写】
+P475 | 【待填写：如 批量推理工具与自洽性指标实现】
+P476 | 【待填写】
+P477 | 【待填写】
+P478 | 【待填写】%
+P479 | 【待填写】
+P480 | 【待填写：如 扰动实验执行、数据整理与报告撰写】
+P481 | 【待填写】
+P482 | 【待填写】
+P483 | 【待填写】%
+P484 | 合计
+P485 | —
+P486 | 1369
+P487 | 2
+P488 | 100%
+P489 | 说明：本组自建的测试工具共 1369 行（run_vggt_inference.py 411 行、metrics.py 491 行、cv2_unicode.py 134 行、tools/robustness_experiments.py 261 行、tools/make_depth_contact_sheet.py 72 行），可按各成员实际分工在上表中拆分填报。

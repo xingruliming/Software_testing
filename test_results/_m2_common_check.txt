@@ -1,0 +1,8 @@
+﻿REPO_ROOT   : E:\0_work\1shijian\Software_testing
+EXP_ROOT    : E:\0_work\1shijian\Software_testing\vggt_output\exp True
+base npz    : True
+water npz   : True
+det2 npz    : False
+model.pt    : E:\0_work\1shijian\model.pt True
+PYTHON_EXE  : D:\anaconda3\envs\Pytorch_Vggt\python.exe
+PREPARE     : True

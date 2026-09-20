@@ -1,0 +1,17 @@
+﻿OK   m2_tests\__init__.py
+OK   m2_tests\common.py
+OK   m2_tests\junit_report.py
+OK   m2_tests\test_m2_ai_001_005_frame_effect.py
+OK   m2_tests\test_m2_ai_006_009_robustness.py
+OK   m2_tests\test_m2_ai_010_012_scene_dependency.py
+OK   m2_tests\test_m2_ai_013_015_input_validation.py
+
+exp 目录:
+True
+  N1
+  N2
+  N5
+  noise10
+  occ25
+  res50
+  _inputs

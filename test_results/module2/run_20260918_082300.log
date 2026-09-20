@@ -1,0 +1,100 @@
+VGGT 模块二：AI 输出单元测试
+执行时间：2026-09-18 08:23:00 +08:00
+Python  : D:\anaconda3\envs\Pytorch_Vggt\python.exe
+仓库根  : E:\0_work\1shijian\Software_testing
+用例范围：M2-AI-001 ~ M2-AI-015（共 15 条）
+test_m2_ai_001_baseline_self_consistency (m2_tests.test_m2_ai_001_005_frame_effect.TestFrameEffect)
+M2-AI-001 基准场景自洽性基线测量（002_computer，9 帧，conf_thres=3.0）。 ... ok
+test_m2_ai_002_five_frames_degrade (m2_tests.test_m2_ai_001_005_frame_effect.TestFrameEffect)
+M2-AI-002 帧数减少至 5 帧的自洽性退化。 ... ok
+test_m2_ai_003_two_frames_degrade_further (m2_tests.test_m2_ai_001_005_frame_effect.TestFrameEffect)
+M2-AI-003 帧数减少至 2 帧的自洽性退化。 ... ok
+test_m2_ai_004_single_frame_g4_unavailable (m2_tests.test_m2_ai_001_005_frame_effect.TestFrameEffect)
+M2-AI-004 单帧输入时光度一致性指标应不可用。 ... ok
+test_m2_ai_005_monotonic_improvement_with_frames (m2_tests.test_m2_ai_001_005_frame_effect.TestFrameEffect)
+M2-AI-005 帧数—指标单调性检验（1→2→5→9）。 ... ok
+test_m2_ai_006_resolution_half_not_degraded (m2_tests.test_m2_ai_006_009_robustness.TestRobustness)
+M2-AI-006 分辨率降为 0.5 倍的鲁棒性。 ... ok
+test_m2_ai_007_gaussian_noise_not_degraded (m2_tests.test_m2_ai_006_009_robustness.TestRobustness)
+M2-AI-007 高斯噪声 σ=10 的鲁棒性。 ... ok
+test_m2_ai_008_occlusion_significant_degradation (m2_tests.test_m2_ai_006_009_robustness.TestRobustness)
+M2-AI-008 随机遮挡 25% 面积的鲁棒性。 ... ok
+test_m2_ai_009_determinism_bitwise_identical (m2_tests.test_m2_ai_006_009_robustness.TestRobustness)
+M2-AI-009 重复运行确定性检验。 ... ok
+test_m2_ai_010_default_threshold_metrics_available (m2_tests.test_m2_ai_010_012_scene_dependency.TestSceneDependency)
+M2-AI-010 竖构图近景场景在默认置信阈值下的可用性。 ... FAIL
+test_m2_ai_011_loose_threshold_shows_degradation (m2_tests.test_m2_ai_010_012_scene_dependency.TestSceneDependency)
+M2-AI-011 竖构图场景放宽置信阈值后的指标测量（conf_thres=1.0）。 ... ok
+test_m2_ai_012_square_padding_does_not_improve (m2_tests.test_m2_ai_010_012_scene_dependency.TestSceneDependency)
+M2-AI-012 排除裁切影响：竖构图补白成正方形后重测。 ... FAIL
+test_m2_ai_013_empty_input_directory (m2_tests.test_m2_ai_013_015_input_validation.TestInputValidation)
+M2-AI-013 空输入目录的异常处理。 ... ok
+test_m2_ai_014_missing_input_directory (m2_tests.test_m2_ai_013_015_input_validation.TestInputValidation)
+M2-AI-014 输入目录不存在的异常处理。 ... ok
+test_m2_ai_015_damaged_image_friendly_error (m2_tests.test_m2_ai_013_015_input_validation.TestInputValidation)
+M2-AI-015 损坏图像文件的异常处理。 ... 
+======================================================================
+FAIL: test_m2_ai_010_default_threshold_metrics_available (m2_tests.test_m2_ai_010_012_scene_dependency.TestSceneDependency)
+M2-AI-010 竖构图近景场景在默认置信阈值下的可用性。
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\0_work\1shijian\Software_testing\deliverables\module2\m2_tests\test_m2_ai_010_012_scene_dependency.py", line 51, in test_m2_ai_010_default_threshold_metrics_available
+    self.assertEqual(
+AssertionError: Lists differ: ['pointmap_vs_depth', 'pointmap_vs_camera', 'photometric'] != []
+
+First list contains 3 additional elements.
+First extra element 0:
+'pointmap_vs_depth'
+
+- ['pointmap_vs_depth', 'pointmap_vs_camera', 'photometric']
++ [] : 默认阈值 3.0 下应能统计全部四项指标，实际不可统计：['pointmap_vs_depth', 'pointmap_vs_camera', 'photometric']。该场景深度置信最大值仅 2.1867（均值 1.1177），低于阈值导致有效像素为 0 —— 对应缺陷 DEF-M2-003：置信度阈值跨场景静默失效。
+
+======================================================================
+FAIL: test_m2_ai_012_square_padding_does_not_improve (m2_tests.test_m2_ai_010_012_scene_dependency.TestSceneDependency)
+M2-AI-012 排除裁切影响：竖构图补白成正方形后重测。
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\0_work\1shijian\Software_testing\deliverables\module2\m2_tests\test_m2_ai_010_012_scene_dependency.py", line 108, in test_m2_ai_012_square_padding_does_not_improve
+    self.assertLess(
+AssertionError: 0.4646688864224935 not less than 0.2 : 补白成正方形后 G1 相对误差未显著改善（改善幅度应小于 20%，即裁切不是退化主因）：原竖构图 0.02973 -> 补白后 0.01592（改善 46.5%）
+
+======================================================================
+FAIL: test_m2_ai_015_damaged_image_friendly_error (m2_tests.test_m2_ai_013_015_input_validation.TestInputValidation) [报错信息应为面向用户的中文提示]
+M2-AI-015 损坏图像文件的异常处理。
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\0_work\1shijian\Software_testing\deliverables\module2\m2_tests\test_m2_ai_013_015_input_validation.py", line 111, in test_m2_ai_015_damaged_image_friendly_error
+    self.assertTrue(
+AssertionError: False is not true : 损坏图像应给出明确的中文错误提示，而不是暴露内部异常堆栈。实际输出末尾：, line 411, in <module>
+    sys.exit(main())
+  File "E:\0_work\1shijian\Software_testing\run_vggt_inference.py", line 319, in main
+    predictions, stats = run_model(output_dir, model, torch)
+  File "E:\0_work\1shijian\Software_testing\run_vggt_inference.py", line 123, in run_model
+    images = load_and_preprocess_images(image_names).to(device)
+  File "E:\0_work\1shijian\Software_testing\vggt-main\vggt\utils\load_fn.py", line 140, in load_and_preprocess_images
+    img = Image.open(image_path)
+  File "D:\anaconda3\envs\Pytorch_Vggt\lib\site-packages\PIL\Image.py", line 3580, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file 'E:\\0_work\\1shijian\\Software_testing\\test_results\\module2\\tmp\\damaged_out_20260918_082441\\images\\broken.jpg'
+
+
+======================================================================
+FAIL: test_m2_ai_015_damaged_image_friendly_error (m2_tests.test_m2_ai_013_015_input_validation.TestInputValidation) [失败后不应残留半成品产物]
+M2-AI-015 损坏图像文件的异常处理。
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\0_work\1shijian\Software_testing\deliverables\module2\m2_tests\test_m2_ai_013_015_input_validation.py", line 122, in test_m2_ai_015_damaged_image_friendly_error
+    self.assertEqual(
+AssertionError: Lists differ: ['images', 'images/broken.jpg'] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+'images'
+
+- ['images', 'images/broken.jpg']
++ [] : 推理失败后不应残留半成品输出目录内容（缺陷 DEF-M2-001），实际残留：['images', 'images/broken.jpg']
+
+----------------------------------------------------------------------
+Ran 15 tests in 122.810s
+
+FAILED (failures=4)

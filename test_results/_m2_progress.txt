@@ -1,0 +1,28 @@
+﻿== _inputs/sq4096 ==
+000000.png  9.3 MB
+000001.png  9.1 MB
+000002.png  6.1 MB
+000003.png  10.1 MB
+000004.png  10.8 MB
+000005.png  10.4 MB
+000006.png  7.3 MB
+000007.png  7.4 MB
+
+== exp/sq4096 ==
+images\000000.png  9793172
+images\000001.png  9544384
+images\000002.png  6351245
+images\000003.png  10549560
+images\000004.png  11370504
+images\000005.png  10856433
+images\000006.png  7656068
+images\000007.png  7727027
+
+== python 进程 ==
+PID 9724  启动 2026/9/18 8:26:10  CPU 15.3s  WS 164 MB
+PID 30420  启动 2026/9/18 8:26:25  CPU 636.5s  WS 1,784 MB
+
+== tmp 目录 ==
+damaged_input_20260918_082441
+damaged_out_20260918_082441
+empty_input_20260918_082437

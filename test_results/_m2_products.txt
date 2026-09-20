@@ -1,0 +1,20 @@
+﻿== vggt_output 顶层 ==
+001_watercup  <DIR>
+002_computer  <DIR>
+003_yinxiang  <DIR>
+004_feiji  <DIR>
+005_football  <DIR>
+006_meal  <DIR>
+007_bikes  <DIR>
+.gitkeep  0
+001_watercup_run.log  2716
+002_computer_run.log  2632
+003_yinxiang_run.log  3031
+004_feiji_run.log  2309
+005_football_run.log  2688
+006_meal_run.log  2597
+007_bikes_run.log  2706
+exp_run.log  1620
+README.md  3690
+
+== exp 目录 ==

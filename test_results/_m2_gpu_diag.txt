@@ -1,0 +1,34 @@
+﻿== nvidia-smi ==
+100 %, 7879 MiB, 8192 MiB
+
+== GPU 进程 ==
+2132, [N/A]
+14836, [N/A]
+14544, [N/A]
+12464, [N/A]
+13872, [N/A]
+19680, [N/A]
+19796, [N/A]
+23180, [N/A]
+20932, [N/A]
+12112, [N/A]
+25948, [N/A]
+14392, [N/A]
+20628, [N/A]
+26276, [N/A]
+10704, [N/A]
+22664, [N/A]
+18056, [N/A]
+21388, [N/A]
+24660, [N/A]
+31728, [N/A]
+30876, [N/A]
+30420, [N/A]
+24688, [N/A]
+
+== exp/sq4096 关键文件 ==
+predictions.npz  exists=False  size=-
+run_info.json  exists=False  size=-
+metrics.json  exists=False  size=-
+inference.log  exists=False  size=-
+depth  exists=False  size=-

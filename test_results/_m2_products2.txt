@@ -1,0 +1,22 @@
+﻿exp exists: False
+== exp tree ==
+
+== 002_computer ==
+depth  <DIR>
+images  <DIR>
+glbscene_50.0_All_maskbFalse_maskwFalse_camTrue_skyFalse_predDepthmap_and_Camera_Branch.glb  14632268
+glbscene_50.0_All_maskbFalse_maskwFalse_camTrue_skyFalse_predPointmap_Branch.glb  14632268
+predictions.npz  109654032
+run_info.json  1957
+
+== 001_watercup ==
+depth  <DIR>
+images  <DIR>
+depth_vs_input_contact_sheet.png  423087
+glbscene_50.0_All_maskbFalse_maskwFalse_camTrue_skyFalse_predDepthmap_and_Camera_Branch.glb  17184164
+glbscene_50.0_All_maskbFalse_maskwFalse_camTrue_skyFalse_predPointmap_Branch.glb  34356552
+metrics.json  1190
+metrics_ct1.json  1842
+predictions.npz  128799192
+QQ20260912-160658.png  583876
+run_info.json  1935

@@ -1,0 +1,16 @@
+﻿moved: E:\0_work\1shijian\Software_testing\deliverables\module2\m2_tests\__pycache__ -> E:\0_work\1shijian\Software_testing\test_results\_m2_pycache_20260918
+
+== module2 最终交付文件 ==
+README.md  11099
+run_tests.ps1  8500
+VGGT模块二测试报告.docx  36165
+VGGT模块二测试用例清单.xlsx  124400
+VGGT模块二缺陷报告.doc  29894
+一键运行模块二测试.bat  1181
+m2_tests\common.py  12183
+m2_tests\junit_report.py  5316
+m2_tests\test_m2_ai_001_005_frame_effect.py  7196
+m2_tests\test_m2_ai_006_009_robustness.py  5794
+m2_tests\test_m2_ai_010_012_scene_dependency.py  5571
+m2_tests\test_m2_ai_013_015_input_validation.py  5437
+m2_tests\__init__.py  386

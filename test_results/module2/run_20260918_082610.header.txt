@@ -1,0 +1,5 @@
+VGGT 模块二：AI 输出单元测试
+执行时间：2026-09-18 08:26:10 +08:00
+Python  : D:\anaconda3\envs\Pytorch_Vggt\python.exe
+仓库根  : E:\0_work\1shijian\Software_testing
+用例范围：M2-AI-001 ~ M2-AI-015（共 15 条）

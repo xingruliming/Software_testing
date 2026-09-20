@@ -1,0 +1,23 @@
+﻿== module2 交付目录 ==
+README.md  11099
+run_tests.ps1  8500
+VGGT模块二测试报告.docx  36165
+VGGT模块二测试用例清单.xlsx  124400
+VGGT模块二缺陷报告.doc  29894
+一键运行模块二测试.bat  1181
+m2_tests\common.py  11555
+m2_tests\junit_report.py  5316
+m2_tests\test_m2_ai_001_005_frame_effect.py  7196
+m2_tests\test_m2_ai_006_009_robustness.py  5794
+m2_tests\test_m2_ai_010_012_scene_dependency.py  5571
+m2_tests\test_m2_ai_013_015_input_validation.py  5437
+m2_tests\__init__.py  386
+
+== test_results/module2（测试运行归档） ==
+DEF-M2-001_reproduction.txt  3844
+DEF-M2-002_reproduction.txt  3880
+DEF-M2-003_reproduction.txt  5329
+DEF-M2-004_reproduction.txt  6405
+DEF-M2-005_reproduction.txt  5037
+README.md  3669
+run_20260918_082300.header.txt  235

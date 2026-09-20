@@ -1,0 +1,29 @@
+==============================================================================
+  VGGT 模块二 · 用例清单（M2-AI-001 ~ M2-AI-015）
+  Python：C:\Users\LENOVO\.workbuddy\binaries\python\envs\default\Scripts\python.exe
+  用例目录：E:\0_work\1shijian\Software_testing\deliverables\module2\m2_tests
+==============================================================================
+
+用例        预期    缺陷          来源文件                                      用例名称
+------------------------------------------------------------------------------
+M2-AI-001   pass    -             test_m2_ai_001_005_frame_effect.py            基准场景自洽性基线测量（002_computer，9 帧）
+M2-AI-002   pass    -             test_m2_ai_001_005_frame_effect.py            帧数减少至 5 帧的自洽性退化
+M2-AI-003   pass    -             test_m2_ai_001_005_frame_effect.py            帧数减少至 2 帧的自洽性退化
+M2-AI-004   pass    -             test_m2_ai_001_005_frame_effect.py            单帧输入时光度一致性指标应不可用
+M2-AI-005   pass    -             test_m2_ai_001_005_frame_effect.py            帧数—指标单调性检验（1→2→5→9）
+M2-AI-006   pass    -             test_m2_ai_006_009_robustness.py              分辨率降为 0.5 倍的鲁棒性
+M2-AI-007   pass    -             test_m2_ai_006_009_robustness.py              高斯噪声 σ=10 的鲁棒性
+M2-AI-008   pass    -             test_m2_ai_006_009_robustness.py              随机遮挡 25% 面积的鲁棒性
+M2-AI-009   pass    -             test_m2_ai_006_009_robustness.py              重复运行确定性检验（逐位一致）
+M2-AI-010   fail    DEF-M2-003    test_m2_ai_010_012_scene_dependency.py        竖构图近景场景在默认置信阈值下的可用性
+M2-AI-011   pass    -             test_m2_ai_010_012_scene_dependency.py        竖构图场景放宽置信阈值后的指标测量
+M2-AI-012   pass    DEF-M2-002    test_m2_ai_010_012_scene_dependency.py        排除裁切影响：竖构图补白成正方形后重测
+M2-AI-013   pass    -             test_m2_ai_013_015_input_validation.py        空输入目录的异常处理
+M2-AI-014   pass    -             test_m2_ai_013_015_input_validation.py        输入目录不存在的异常处理
+M2-AI-015   fail    DEF-M2-001    test_m2_ai_013_015_input_validation.py        损坏图像文件的异常处理
+------------------------------------------------------------------------------
+  共 15 条用例；预期通过 13 条，预期失败 2 条（复现已知缺陷）
+  已就绪产物：11 项
+  可现场生成（需 CUDA）：exp:sq4096
+
+  本机未执行任何测试（--list 为只读模式）。

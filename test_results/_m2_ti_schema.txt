@@ -1,0 +1,39 @@
+﻿# doc_get_table_info
+
+鑾峰彇鎸囧畾琛ㄦ牸鐨勫畬鏁翠俊鎭紙DOC锛夈€傚畾浣嶆柟寮忎笁閫変竴锛堜紭鍏堢骇 table_id > idx > table_locate锛夛細鈶?table_id锛? 瀛楃绋冲畾鏍囪瘑锛屽彇鑷?doc_list_tables锛屾渶鎺ㄨ崘锛夛紱鈶?idx锛堣〃鏍煎唴浠绘剰 GCP锛夛紱鈶?table_locate.cell_match锛堟寜鍗曞厓鏍兼枃瀛楀畾浣嶏級銆傛墜涓婇兘娌℃湁鏃跺厛 doc_list_tables 鎷?table_id銆?
+
+Returns JSON:
+```
+{ version: int,
+  block: {
+    id: string,           // table_id锛堟棫鏂囨。涓?tbl:<begin>:<end>"褰㈠紡锛屼笉鑳藉綋table_id浼狅級
+    idx: int,             // 琛ㄦ牸 GCP 璧峰
+    end_idx: int,         // 琛ㄦ牸 GCP 缁撴潫
+    table: {
+      row_count: int,
+      col_count: int,
+      alignment: string,  // left/center/right
+      width, style, cell_margin, borders,// 琛ㄦ牸灞炴€?
+      cells: [{// 婊℃牸灞曞紑锛堝惈鍗犱綅鏍硷級
+        row: int, col: int,   // 1-based
+        text: string,
+        text_property: {bold,italic,font_size,color,...},
+        paragraph_property: {align,indent,spacing,...},
+        is_merge_continue?: bool,  // 鍚堝苟鍗犱綅鏍兼爣璁?
+        height_pt?: float, height_rule?: string  // 琛岄珮(浠呮瘡琛岄鏍?
+      }]
+    }
+  },
+  table_start_index: int,
+  table_end_index: int,
+  resolved_idx: int,
+  resolved_cell?: {row,col}  // 浠?table_locate 妯″紡
+}
+```
+鍏稿瀷鐢ㄦ硶锛氳琛ㄥ悗鐢?doc_set_table_cells 鍐欏洖淇敼銆?
+
+鍙傛暟锛堚湏=蹇呭～锛夛細
+  [ ] file_id (string): The file_id of the editor to operate on
+  [ ] idx (integer): 琛ㄦ牸鍐呬换鎰?GCP锛坱able_id 鏈彁渚涙椂浣跨敤锛夈€?
+  [ ] table_id (string): 琛ㄦ牸鍞竴鏍囪瘑锛? 瀛楃瀛楃涓诧級锛屼紭鍏堜娇鐢ㄣ€備笌 idx 浜岄€変竴鎻愪緵鍗冲彲銆傜浉姣?idx 鐨勪紭鍔挎槸涓嶉殢缂栬緫鎿嶄綔婕傜Щ銆傛敞鎰忥細閮ㄥ垎琛ㄦ牸锛堟棫鏂囨。 / docx 瀵煎叆锛夋病鏈夋寔涔?table_id锛屾鏃舵敼鐢?idx 鎴?table_locate銆?
+  [ ] table_locate (object): 鎸夊崟鍏冩牸鍙鏂囧瓧瀹氫綅琛ㄦ牸锛堜笌 idx 浜岄€変竴锛夈€俢ell_match 椤讳负鏌愰敋鐐规牸 text 鐨勭簿纭?UTF-8 瀛愪覆锛堜粠 cells[].text 鍘熸牱澶嶅埗锛屽彲閬垮厤鎵嬪～ idx 鏃剁殑绌烘牸/绗﹀彿闂锛夈€俽ow/col 涓哄彲閫?1-based hint锛坆est-effort锛夈€傚懡涓涓牸鏃舵姤閿?ambiguous_matches锛屾棤 occurrence锛涜鍔犻暱 cell_match 鎴栧姞 hint銆?

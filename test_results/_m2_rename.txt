@@ -1,0 +1,2 @@
+﻿renamed: E:\0_work\1shijian\Software_testing\vggt_output\exp\sq4096 -> E:\0_work\1shijian\Software_testing\vggt_output\exp\sq4096_stale_9frames
+renamed: E:\0_work\1shijian\Software_testing\vggt_output\exp\_inputs\sq4096 -> E:\0_work\1shijian\Software_testing\vggt_output\exp\_inputs\sq4096_stale_9frames
